@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HalcNews.Temas;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
@@ -53,6 +55,12 @@ public class HalcNewsDbContext :
 
     #endregion
 
+
+    #region Entidades de dominio
+    public DbSet<Theme> Themes { get; set; }
+
+    #endregion
+
     public HalcNewsDbContext(DbContextOptions<HalcNewsDbContext> options)
         : base(options)
     {
@@ -82,5 +90,13 @@ public class HalcNewsDbContext :
         //    b.ConfigureByConvention(); //auto configure for the base class props
         //    //...
         //});
+
+        //Entidad Theme
+        builder.Entity<Theme>(b =>
+        {
+            b.ToTable(HalcNewsConsts.DbTablePrefix + "Themes", HalcNewsConsts.DbSchema);
+            b.ConfigureByConvention(); 
+            b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+        });
     }
 }
