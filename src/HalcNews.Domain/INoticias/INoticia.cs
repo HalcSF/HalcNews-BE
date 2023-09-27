@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace HalcNews.INoticia
+namespace HalcNews.INoticias
 {
-    public interface INoticias
+    public interface INoticia
     {
 
     }
