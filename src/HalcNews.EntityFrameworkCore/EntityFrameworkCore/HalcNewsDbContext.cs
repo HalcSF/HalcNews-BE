@@ -1,4 +1,4 @@
-﻿using HalcNews.Notice;
+﻿using HalcNews.Noticias;
 using HalcNews.Temas;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
@@ -107,9 +107,11 @@ public class HalcNewsDbContext :
             b.ConfigureByConvention();
             b.Property(x => x.Autor).IsRequired().HasMaxLength(128);
             b.Property(x => x.Titulo).IsRequired().HasMaxLength(128);
-            b.Property(x => x.Descripcion).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Descripcion).IsRequired();
+            b.Property(x => x.Contenido).IsRequired();
+            b.Property(x => x.Fecha). IsRequired();
             b.Property(x => x.Url).IsRequired().HasMaxLength(128);
-            b.Property(x => x.UrlImagen).IsRequired().HasMaxLength(128);
+            b.Property(x => x.UrlImagen).HasMaxLength(128);
         });
     }
 }

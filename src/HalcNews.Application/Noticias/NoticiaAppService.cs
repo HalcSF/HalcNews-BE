@@ -1,4 +1,4 @@
-﻿using HalcNews.Notice;
+﻿using HalcNews.Noticias;
 using System;
 using System.Collections.Generic;
 using System.Linq;
