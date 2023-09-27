@@ -1,4 +1,4 @@
-﻿using HalcNews.INoticia;
+﻿using HalcNews.INoticias;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,29 +8,11 @@ using Volo.Abp.Domain.Entities;
 
 namespace HalcNews.ListaNoticias
 {
-    public abstract class ListaNoticias : Entity<int>, INoticias
+    public abstract class ListaNoticias : Entity<int>, INoticia
     {
-        private DateOnly _Fecha;
-        private string _Descripcion;
-        private string _Titulo;
-
-        ///<sumary>
-        /// Crea una nueva instancia de la clase
-        ///</sumary>
-        /// <param name="fecha"> autor de la noticia.</param>
-        /// <param name="descripcion">descripcion de la noticia. </param>
-        /// <param name="titulo">titulo de la noticia.</param>
-        /// <returns>ListaNoticias</returns>
-
-        public ListaNoticias(DateOnly fecha, string descripcion, string titulo)
-        {
-            _Fecha = fecha;
-            _Titulo = titulo;
-            _Descripcion = descripcion;
-        }
-
-        public DateOnly Fecha { get => _Fecha; set => _Fecha = value; }
-        public string Titulo { get => _Titulo; set => _Titulo = value; }
-        public string Descripcion { get => _Descripcion; set => _Descripcion = value; }
+    
+        public DateOnly Fecha { get; set; }
+        public string Titulo { get; set; }
+        public string Descripcion { get; set; }
     }
 }
