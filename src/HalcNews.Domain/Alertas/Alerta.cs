@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Volo.Abp.Domain.Entities;
 
 namespace HalcNews.Alertas
 {
-    public abstract class Alerta:
+    public abstract class Alerta: Entity
     {
         private string _Busqueda;
         private DateOnly _FechaEncontrada;

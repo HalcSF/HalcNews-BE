@@ -1,14 +1,14 @@
-﻿using System;
+﻿using HalcNews.INoticia;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HalcNews.INoticia;
 using Volo.Abp.Domain.Entities;
 
-namespace HalcNews.Noticia
+namespace HalcNews.Notice
 {
-    public abstract class Noticia : Entity<int>,INoticias
+    public class Noticia : Entity<int>, INoticias
     {
         private string _Autor;
         private string _Titulo;
@@ -49,3 +49,4 @@ namespace HalcNews.Noticia
         public string UrlImagen { get => _UrlImagen; set => _UrlImagen = value; }
     }
 }
+

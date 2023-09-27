@@ -1,4 +1,5 @@
-﻿using HalcNews.Temas;
+﻿using HalcNews.Notice;
+using HalcNews.Temas;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -97,6 +98,18 @@ public class HalcNewsDbContext :
             b.ToTable(HalcNewsConsts.DbTablePrefix + "Themes", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention(); 
             b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+        });
+
+        //Entidad Noticia
+        builder.Entity<Noticia>(b =>
+        {
+            b.ToTable(HalcNewsConsts.DbTablePrefix + "Noticas", HalcNewsConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.Autor).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Titulo).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Descripcion).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Url).IsRequired().HasMaxLength(128);
+            b.Property(x => x.UrlImagen).IsRequired().HasMaxLength(128);
         });
     }
 }
