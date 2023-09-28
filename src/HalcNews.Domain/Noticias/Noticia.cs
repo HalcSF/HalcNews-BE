@@ -8,7 +8,7 @@ using Volo.Abp.Domain.Entities;
 
 namespace HalcNews.Noticias
 {
-    public abstract class Noticia : Entity<int>,INoticia
+    public class Noticia : Entity<int>,INoticia
     {
         public string Autor {  get; set; }
         public string Titulo { get; set; }
