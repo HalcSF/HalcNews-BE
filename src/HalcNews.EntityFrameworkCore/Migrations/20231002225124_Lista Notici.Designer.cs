@@ -13,8 +13,8 @@ using Volo.Abp.EntityFrameworkCore;
 namespace HalcNews.Migrations
 {
     [DbContext(typeof(HalcNewsDbContext))]
-    [Migration("20230929011317_ListaNoticias")]
-    partial class ListaNoticias
+    [Migration("20231002225124_Lista Notici")]
+    partial class ListaNotici
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,6 +26,32 @@ namespace HalcNews.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("HalcNews.ListaNoticias.EListaNoticias", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasMaxLength(128)
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppListaNoticias", (string)null);
+                });
 
             modelBuilder.Entity("HalcNews.Noticias.Noticia", b =>
                 {
