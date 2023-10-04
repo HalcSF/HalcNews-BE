@@ -113,6 +113,14 @@ public class HalcNewsDbContext :
             b.Property(x => x.Fecha). IsRequired();
             b.Property(x => x.Url).IsRequired().HasMaxLength(128);
             b.Property(x => x.UrlImagen).HasMaxLength(128);
+
+            //Relación con Lectura
+
+            b.HasMany(x => x.Lecturas)
+                .WithOne(x => x.Noticia)
+                .HasForeignKey(x => x.NoticiasId)
+                .IsRequired();
+
         });
 
         //Entidad ListaNoticias
@@ -124,5 +132,26 @@ public class HalcNewsDbContext :
             b.Property(x => x.Titulo).IsRequired().HasMaxLength(128);
             b.Property(x => x.Descripcion).IsRequired();
         });
+
+        //Entidad Lectura
+        builder.Entity<Lectura>(b =>
+        {
+            b.ToTable(HalcNewsConsts.DbTablePrefix + "Lectura", HalcNewsConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.fechaLectura).IsRequired();
+
+        });
+
+        //Entidad Alerta
+        builder.Entity<Alerta>(b =>
+        {
+            b.ToTable(HalcNewsConsts.DbTablePrefix + "Alerta", HalcNewsConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.Busqueda).IsRequired().HasMaxLength(128);
+            b.Property(x => x.FechaEncontrada).IsRequired();
+            b.Property(x => x.Leida).IsRequired();
+        });
     }
+
+}
 }
