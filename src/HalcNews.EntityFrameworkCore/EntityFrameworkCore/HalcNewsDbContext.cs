@@ -106,6 +106,17 @@ public class HalcNewsDbContext :
         {
             b.ToTable(HalcNewsConsts.DbTablePrefix + "Noticas", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
+
+            b.HasOne(x => x.Fuente)
+            .WithMany()
+            .HasForeignKey(x => x.FuenteId)
+            .IsRequired();
+
+            b.HasOne(x => x.Lectura)
+            .WithMany()
+            .HasForeignKey(x => x.LecturaId)
+            .IsRequired();
+
             b.Property(x => x.Autor).IsRequired().HasMaxLength(128);
             b.Property(x => x.Titulo).IsRequired().HasMaxLength(128);
             b.Property(x => x.Descripcion).IsRequired();
@@ -124,5 +135,38 @@ public class HalcNewsDbContext :
             b.Property(x => x.Titulo).IsRequired().HasMaxLength(128);
             b.Property(x => x.Descripcion).IsRequired();
         });
+
+        //Entidad Notificacion
+        builder.Entity<Notificacion>(b =>
+        {
+            b.ToTable(HalcNewsConsts.DbTablePrefix + "Notificaciones", HalcNewsConsts.DbSchema);
+            b.ConfigureByConvention();
+
+            b.HasOne(x => x.User)
+            .WithMany()
+            .HasForeignKey(x => x.UserId)
+            .IsRequired();
+
+            b.HasOne(x => x.Alerta)
+            .WithMany()
+            .HasForeignKey(x => x.AlertaId)
+            .IsRequired();
+
+            b.Property(x => x.Fecha).IsRequired();
+            b.Property(x => x.Texto).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Link).IsRequired().HasMaxLenght(128);
+        });
+
+        //Entidad Fuente
+        builder.Entity<Fuente>(b =>
+        {
+            b.ToTable(HalcNewsConsts.DbTablePrefix + "Fuentes", HalcNewsConsts.DbSchema);
+            b.ConfigureByConvention();
+
+            b.HasMany(x => x.Noticia)
+            .WithOne(x => x.Fuente)
+            .HasForeignKey(x => x.FuenteId)
+            .IsRequired();
+        })
     }
 }
