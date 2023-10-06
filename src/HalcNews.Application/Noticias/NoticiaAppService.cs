@@ -14,6 +14,7 @@ namespace HalcNews.Noticias
         public NoticiaAppService(IRepository<Noticia,int> repository) 
             : base(repository)
         { 
+
         }
     }
 }

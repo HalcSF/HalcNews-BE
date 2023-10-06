@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HalcNews.INoticias;
 using Volo.Abp.Domain.Entities;
 
 namespace HalcNews.Noticias
 {
-    public class Noticia : Entity<int>,INoticia
+    public class Noticia : Entity<int>
     {
         public string Autor {  get; set; }
         public string Titulo { get; set; }
