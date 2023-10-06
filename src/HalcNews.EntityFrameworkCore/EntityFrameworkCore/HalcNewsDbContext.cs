@@ -1,6 +1,8 @@
 ﻿using HalcNews.Noticias;
 using HalcNews.Temas;
 using HalcNews.ListaNoticias;
+using HalcNews.Fuentes;
+using Volo.Abp.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -107,10 +109,7 @@ public class HalcNewsDbContext :
             b.ToTable(HalcNewsConsts.DbTablePrefix + "Noticas", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
 
-            b.HasOne(x => x.Fuente)
-            .WithMany()
-            .HasForeignKey(x => x.FuenteId)
-            .IsRequired();
+           
 
             b.Property(x => x.Autor).IsRequired().HasMaxLength(128);
             b.Property(x => x.Titulo).IsRequired().HasMaxLength(128);
@@ -124,8 +123,14 @@ public class HalcNewsDbContext :
 
             b.HasMany(x => x.Lecturas)
                 .WithOne(x => x.Noticia)
-                .HasForeignKey(x => x.NoticiasId)
+                .HasForeignKey(x => x.Noticia)
                 .IsRequired();
+
+            //Relación con Fuente
+            b.HasOne(x => x.Fuente)
+           .WithMany()
+           .HasForeignKey(x => x.Fuente)
+           .IsRequired();
 
         });
 
@@ -178,7 +183,6 @@ public class HalcNewsDbContext :
             b.ToTable(HalcNewsConsts.DbTablePrefix + "Lectura", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
             b.Property(x => x.fechaLectura).IsRequired();
-
         });
 
         //Entidad Alerta

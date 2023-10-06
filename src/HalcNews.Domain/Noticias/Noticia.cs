@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HalcNews.Fuentes;
+using HalcNews.Lecturas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +19,9 @@ namespace HalcNews.Noticias
         public string Url { get; set; }
         public string UrlImagen { get; set; }
 
+        // asociaciones
         public ICollection<Lectura> Lecturas { get; set; }
+        public Fuente Fuente { get; set; }
 
     }
 }
