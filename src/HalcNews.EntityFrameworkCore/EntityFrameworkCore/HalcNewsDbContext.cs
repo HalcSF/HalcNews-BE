@@ -112,11 +112,6 @@ public class HalcNewsDbContext :
             .HasForeignKey(x => x.FuenteId)
             .IsRequired();
 
-            b.HasOne(x => x.Lectura)
-            .WithMany()
-            .HasForeignKey(x => x.LecturaId)
-            .IsRequired();
-
             b.Property(x => x.Autor).IsRequired().HasMaxLength(128);
             b.Property(x => x.Titulo).IsRequired().HasMaxLength(128);
             b.Property(x => x.Descripcion).IsRequired();
@@ -176,11 +171,9 @@ public class HalcNewsDbContext :
             .HasForeignKey(x => x.FuenteId)
             .IsRequired();
         })
-    }
-}
 
-//Entidad Lectura
-builder.Entity<Lectura>(b =>
+        //Entidad Lectura
+        builder.Entity<Lectura>(b =>
         {
             b.ToTable(HalcNewsConsts.DbTablePrefix + "Lectura", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
@@ -188,15 +181,14 @@ builder.Entity<Lectura>(b =>
 
         });
 
-//Entidad Alerta
-builder.Entity<Alerta>(b =>
-{
-    b.ToTable(HalcNewsConsts.DbTablePrefix + "Alerta", HalcNewsConsts.DbSchema);
-    b.ConfigureByConvention();
-    b.Property(x => x.Busqueda).IsRequired().HasMaxLength(128);
-    b.Property(x => x.FechaEncontrada).IsRequired();
-    b.Property(x => x.Leida).IsRequired();
-});
+        //Entidad Alerta
+        builder.Entity<Alerta>(b =>
+        {
+            b.ToTable(HalcNewsConsts.DbTablePrefix + "Alerta", HalcNewsConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.Busqueda).IsRequired().HasMaxLength(128);
+            b.Property(x => x.FechaEncontrada).IsRequired();
+            b.Property(x => x.Leida).IsRequired();
+        });
     }
-
 }
