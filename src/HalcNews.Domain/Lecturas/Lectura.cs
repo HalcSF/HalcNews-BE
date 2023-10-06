@@ -10,5 +10,7 @@ namespace HalcNews.Lecturas
     public class Lectura : Entity<int>
     {
         public DateOnly FechaLectura {  get; set; }
+        public Noticias Noticias { get; set; }
+        public Guid NoticiasId { get; set; }
     }
 }
