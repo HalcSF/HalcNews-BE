@@ -12,3 +12,4 @@ namespace HalcNews.Temas
         public string Name { get; set; }
     }
 }
+    
