@@ -9,6 +9,6 @@ namespace HalcNews.Fuentes
 {
     public class Fuente : Entity<int>
     {
-        public string nombre {  get; set; }
+        public string Nombre {  get; set; }
     }
 }
