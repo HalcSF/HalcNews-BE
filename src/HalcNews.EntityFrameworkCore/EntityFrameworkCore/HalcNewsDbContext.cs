@@ -18,6 +18,9 @@ using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using HalcNews.Notificaciones;
+using HalcNews.Lecturas;
+using HalcNews.Alertas;
 
 namespace HalcNews.EntityFrameworkCore;
 
@@ -109,8 +112,6 @@ public class HalcNewsDbContext :
             b.ToTable(HalcNewsConsts.DbTablePrefix + "Noticas", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
 
-           
-
             b.Property(x => x.Autor).IsRequired().HasMaxLength(128);
             b.Property(x => x.Titulo).IsRequired().HasMaxLength(128);
             b.Property(x => x.Descripcion).IsRequired();
@@ -150,19 +151,15 @@ public class HalcNewsDbContext :
             b.ToTable(HalcNewsConsts.DbTablePrefix + "Notificaciones", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
 
+            /*
             b.HasOne(x => x.User)
             .WithMany()
             .HasForeignKey(x => x.UserId)
-            .IsRequired();
-
-            b.HasOne(x => x.Alerta)
-            .WithMany()
-            .HasForeignKey(x => x.AlertaId)
-            .IsRequired();
+            .IsRequired();*/
 
             b.Property(x => x.Fecha).IsRequired();
             b.Property(x => x.Texto).IsRequired().HasMaxLength(128);
-            b.Property(x => x.Link).IsRequired().HasMaxLenght(128);
+            b.Property(x => x.Link).IsRequired();
         });
 
         //Entidad Fuente
@@ -170,19 +167,20 @@ public class HalcNewsDbContext :
         {
             b.ToTable(HalcNewsConsts.DbTablePrefix + "Fuentes", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
+            b.Property(x => x.Nombre).IsRequired();
 
-            b.HasMany(x => x.Noticia)
+            b.HasMany(x => x.Noticias)
             .WithOne(x => x.Fuente)
-            .HasForeignKey(x => x.FuenteId)
+            .HasForeignKey(x => x.Fuente)
             .IsRequired();
-        })
+        });
 
         //Entidad Lectura
         builder.Entity<Lectura>(b =>
         {
             b.ToTable(HalcNewsConsts.DbTablePrefix + "Lectura", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
-            b.Property(x => x.fechaLectura).IsRequired();
+            b.Property(x => x.FechaLectura).IsRequired();
         });
 
         //Entidad Alerta
@@ -193,6 +191,11 @@ public class HalcNewsDbContext :
             b.Property(x => x.Busqueda).IsRequired().HasMaxLength(128);
             b.Property(x => x.FechaEncontrada).IsRequired();
             b.Property(x => x.Leida).IsRequired();
+
+            b.HasMany(x => x.Notificaciones)
+                .WithOne(x => x.Alerta)
+                .HasForeignKey(x => x.Alerta)
+                .IsRequired();
         });
     }
 }

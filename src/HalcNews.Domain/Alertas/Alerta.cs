@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HalcNews.Lecturas;
+using HalcNews.Notificaciones;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +13,7 @@ namespace HalcNews.Alertas
    
         public string Busqueda {get; set;}
         public DateOnly FechaEncontrada { get; set; }
+        public ICollection<Notificacion> Notificaciones { get; set; }
         public bool Leida { get; set; }
     }
 }

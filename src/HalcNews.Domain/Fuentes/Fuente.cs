@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HalcNews.Noticias;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace HalcNews.Fuentes
 {
     public class Fuente : Entity<int>
     {
-        public string nombre {  get; set; }
+        public string Nombre { get; set; }
+        public ICollection<Noticia> Noticias { get; set; }
     }
 }

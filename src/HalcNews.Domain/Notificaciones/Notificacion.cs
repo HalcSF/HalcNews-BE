@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HalcNews.Alertas;
+using HalcNews.Noticias;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +14,6 @@ namespace HalcNews.Notificaciones
         public DateOnly Fecha { get; set; }
         public string Texto { get; set; }
         public string Link { get; set; }
+        public Alerta Alerta { get; set; }
     }
 }
