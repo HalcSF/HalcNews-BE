@@ -14,6 +14,7 @@ namespace HalcNews.Noticias
         public DateTime Fecha { get; set; }
         public string Url { get; set; }
         public string UrlImagen { get; set; }
+        public int FuenteId { get; set; }
 
     }
 }
