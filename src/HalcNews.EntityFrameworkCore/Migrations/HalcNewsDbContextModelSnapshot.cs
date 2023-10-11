@@ -24,6 +24,68 @@ namespace HalcNews.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("HalcNews.Alertas.Alerta", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Busqueda")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<DateTime>("FechaEncontrada")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Leida")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppAlerta", (string)null);
+                });
+
+            modelBuilder.Entity("HalcNews.Fuentes.Fuente", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppFuentes", (string)null);
+                });
+
+            modelBuilder.Entity("HalcNews.Lecturas.Lectura", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("FechaLectura")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("NoticiaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NoticiaId");
+
+                    b.ToTable("AppLectura", (string)null);
+                });
+
             modelBuilder.Entity("HalcNews.ListaNoticias.EListaNoticias", b =>
                 {
                     b.Property<int>("Id")
@@ -74,6 +136,9 @@ namespace HalcNews.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("FuenteId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasMaxLength(128)
@@ -91,7 +156,39 @@ namespace HalcNews.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FuenteId");
+
                     b.ToTable("AppNoticas", (string)null);
+                });
+
+            modelBuilder.Entity("HalcNews.Notificaciones.Notificacion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AlertaId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Link")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Texto")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlertaId");
+
+                    b.ToTable("AppNotificaciones", (string)null);
                 });
 
             modelBuilder.Entity("HalcNews.Temas.Theme", b =>
@@ -1768,6 +1865,39 @@ namespace HalcNews.Migrations
                     b.ToTable("AbpTenantConnectionStrings", (string)null);
                 });
 
+            modelBuilder.Entity("HalcNews.Lecturas.Lectura", b =>
+                {
+                    b.HasOne("HalcNews.Noticias.Noticia", "Noticia")
+                        .WithMany("Lecturas")
+                        .HasForeignKey("NoticiaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Noticia");
+                });
+
+            modelBuilder.Entity("HalcNews.Noticias.Noticia", b =>
+                {
+                    b.HasOne("HalcNews.Fuentes.Fuente", "Fuente")
+                        .WithMany("Noticias")
+                        .HasForeignKey("FuenteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Fuente");
+                });
+
+            modelBuilder.Entity("HalcNews.Notificaciones.Notificacion", b =>
+                {
+                    b.HasOne("HalcNews.Alertas.Alerta", "Alerta")
+                        .WithMany("Notificaciones")
+                        .HasForeignKey("AlertaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Alerta");
+                });
+
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLogAction", b =>
                 {
                     b.HasOne("Volo.Abp.AuditLogging.AuditLog", null)
@@ -1908,6 +2038,21 @@ namespace HalcNews.Migrations
                         .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HalcNews.Alertas.Alerta", b =>
+                {
+                    b.Navigation("Notificaciones");
+                });
+
+            modelBuilder.Entity("HalcNews.Fuentes.Fuente", b =>
+                {
+                    b.Navigation("Noticias");
+                });
+
+            modelBuilder.Entity("HalcNews.Noticias.Noticia", b =>
+                {
+                    b.Navigation("Lecturas");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>

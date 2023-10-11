@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using HalcNews.Fuentes;
+using HalcNews.Noticias;
+using HalcNews.Source;
 using HalcNews.Temas;
 using HalcNews.Themes;
 
@@ -12,5 +15,7 @@ public class HalcNewsApplicationAutoMapperProfile : Profile
          * Alternatively, you can split your mapping configurations
          * into multiple profile classes for a better organization. */
         CreateMap<Theme, ThemeDto>();
+        CreateMap<Noticia, NoticiaDto>();
+        CreateMap<Fuente,FuenteDto>();
     }
 }
