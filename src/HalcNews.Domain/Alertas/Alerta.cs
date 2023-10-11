@@ -9,10 +9,10 @@ using Volo.Abp.Domain.Entities;
 
 namespace HalcNews.Alertas
 {
-    public abstract class Alerta : Entity<int> {
+    public class Alerta : Entity<int> {
    
         public string Busqueda {get; set;}
-        public DateOnly FechaEncontrada { get; set; }
+        public DateTime FechaEncontrada { get; set; }
         public ICollection<Notificacion> Notificaciones { get; set; }
         public bool Leida { get; set; }
     }

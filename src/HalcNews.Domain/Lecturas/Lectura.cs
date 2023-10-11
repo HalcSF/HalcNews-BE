@@ -14,7 +14,7 @@ namespace HalcNews.Lecturas
 {
     public class Lectura : Entity<int>
     {
-        public DateOnly FechaLectura {  get; set; }
+        public DateTime FechaLectura {  get; set; }
 
         // asociaciones
         // public AbpUser<> Usuario { get; set; } // esperar resp del profe

@@ -9,9 +9,9 @@ using Volo.Abp.Domain.Entities;
 
 namespace HalcNews.Notificaciones
 {
-    public abstract class Notificacion : Entity<int>
+    public class Notificacion : Entity<int>
     {
-        public DateOnly Fecha { get; set; }
+        public DateTime Fecha { get; set; }
         public string Texto { get; set; }
         public string Link { get; set; }
         public Alerta Alerta { get; set; }
