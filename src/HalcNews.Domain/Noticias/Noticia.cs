@@ -22,6 +22,7 @@ namespace HalcNews.Noticias
         // asociaciones
         public ICollection<Lectura> Lecturas { get; set; }
         public Fuente Fuente { get; set; }
+        public int FuenteId { get; set; }
 
     }
 }

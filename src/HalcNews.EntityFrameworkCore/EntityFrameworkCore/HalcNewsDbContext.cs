@@ -124,14 +124,8 @@ public class HalcNewsDbContext :
 
             b.HasMany(x => x.Lecturas)
                 .WithOne(x => x.Noticia)
-                .HasForeignKey(x => x.Noticia)
+                .HasForeignKey(x => x.NoticiaId)
                 .IsRequired();
-
-            //Relación con Fuente
-            b.HasOne(x => x.Fuente)
-           .WithMany()
-           .HasForeignKey(x => x.Fuente)
-           .IsRequired();
 
         });
 
@@ -171,7 +165,7 @@ public class HalcNewsDbContext :
 
             b.HasMany(x => x.Noticias)
             .WithOne(x => x.Fuente)
-            .HasForeignKey(x => x.Fuente)
+            .HasForeignKey(x => x.FuenteId)
             .IsRequired();
         });
 
@@ -194,7 +188,7 @@ public class HalcNewsDbContext :
 
             b.HasMany(x => x.Notificaciones)
                 .WithOne(x => x.Alerta)
-                .HasForeignKey(x => x.Alerta)
+                .HasForeignKey(x => x.AlertaId)
                 .IsRequired();
         });
     }

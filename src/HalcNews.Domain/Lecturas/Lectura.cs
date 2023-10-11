@@ -19,5 +19,6 @@ namespace HalcNews.Lecturas
         // asociaciones
         // public AbpUser<> Usuario { get; set; } // esperar resp del profe
         public Noticia Noticia { get; set; }
+        public int NoticiaId {  get; set; }
     }
 }
