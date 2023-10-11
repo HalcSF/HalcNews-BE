@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Entities;
 
-namespace HalcNews.Alerta
+namespace HalcNews.Alertas
 {
     public abstract class Alerta : Entity<int> {
    
