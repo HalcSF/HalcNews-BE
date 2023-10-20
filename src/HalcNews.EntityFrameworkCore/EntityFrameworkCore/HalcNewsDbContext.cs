@@ -65,8 +65,8 @@ public class HalcNewsDbContext :
 
     #region Entidades de dominio
     public DbSet<Theme> themes { get; set; }
-    public DbSet<Noticia> noticias { get; set; }
-    public DbSet<EListaNoticias> listaNoticias { get; set; }
+    public DbSet<New> news { get; set; }
+    public DbSet<NewsListE> newsList { get; set; }
 
 
     #endregion
