@@ -6,7 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HalcNews.Migrations
 {
     /// <inheritdoc />
+<<<<<<<< HEAD:src/HalcNews.EntityFrameworkCore/Migrations/20231020220423_initial.cs
     public partial class initial : Migration
+========
+    public partial class NewInitial : Migration
+>>>>>>>> e6ddd6da96ea2c676777a54c9b7fab6a26f47462:src/HalcNews.EntityFrameworkCore/Migrations/20231011233030_NewInitial.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -376,9 +380,15 @@ namespace HalcNews.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+<<<<<<<< HEAD:src/HalcNews.EntityFrameworkCore/Migrations/20231020220423_initial.cs
                     Search = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     DateFound = table.Column<DateTime>(type: "datetime2", nullable: false),
                     isRead = table.Column<bool>(type: "bit", nullable: false)
+========
+                    Busqueda = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    FechaEncontrada = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Leida = table.Column<bool>(type: "bit", nullable: false)
+>>>>>>>> e6ddd6da96ea2c676777a54c9b7fab6a26f47462:src/HalcNews.EntityFrameworkCore/Migrations/20231011233030_NewInitial.cs
                 },
                 constraints: table =>
                 {
@@ -391,7 +401,11 @@ namespace HalcNews.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+<<<<<<<< HEAD:src/HalcNews.EntityFrameworkCore/Migrations/20231020220423_initial.cs
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+========
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false)
+>>>>>>>> e6ddd6da96ea2c676777a54c9b7fab6a26f47462:src/HalcNews.EntityFrameworkCore/Migrations/20231011233030_NewInitial.cs
                 },
                 constraints: table =>
                 {
@@ -404,9 +418,15 @@ namespace HalcNews.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+<<<<<<<< HEAD:src/HalcNews.EntityFrameworkCore/Migrations/20231020220423_initial.cs
                     Date = table.Column<DateTime>(type: "datetime2", maxLength: 128, nullable: false),
                     Title = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+========
+                    Fecha = table.Column<DateTime>(type: "datetime2", maxLength: 128, nullable: false),
+                    Titulo = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false)
+>>>>>>>> e6ddd6da96ea2c676777a54c9b7fab6a26f47462:src/HalcNews.EntityFrameworkCore/Migrations/20231011233030_NewInitial.cs
                 },
                 constraints: table =>
                 {
@@ -724,17 +744,29 @@ namespace HalcNews.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+<<<<<<<< HEAD:src/HalcNews.EntityFrameworkCore/Migrations/20231020220423_initial.cs
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Text = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     Link = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AlertID = table.Column<int>(type: "int", nullable: false)
+========
+                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Texto = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Link = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AlertaId = table.Column<int>(type: "int", nullable: false)
+>>>>>>>> e6ddd6da96ea2c676777a54c9b7fab6a26f47462:src/HalcNews.EntityFrameworkCore/Migrations/20231011233030_NewInitial.cs
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AppNotificaciones", x => x.Id);
                     table.ForeignKey(
+<<<<<<<< HEAD:src/HalcNews.EntityFrameworkCore/Migrations/20231020220423_initial.cs
                         name: "FK_AppNotificaciones_AppAlerta_AlertID",
                         column: x => x.AlertID,
+========
+                        name: "FK_AppNotificaciones_AppAlerta_AlertaId",
+                        column: x => x.AlertaId,
+>>>>>>>> e6ddd6da96ea2c676777a54c9b7fab6a26f47462:src/HalcNews.EntityFrameworkCore/Migrations/20231011233030_NewInitial.cs
                         principalTable: "AppAlerta",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -746,6 +778,7 @@ namespace HalcNews.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+<<<<<<<< HEAD:src/HalcNews.EntityFrameworkCore/Migrations/20231020220423_initial.cs
                     Author = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     Title = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -754,13 +787,28 @@ namespace HalcNews.Migrations
                     Url = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     UrlImage = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     SourceId = table.Column<int>(type: "int", nullable: false)
+========
+                    Autor = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Titulo = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Contenido = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Url = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    UrlImagen = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    FuenteId = table.Column<int>(type: "int", nullable: false)
+>>>>>>>> e6ddd6da96ea2c676777a54c9b7fab6a26f47462:src/HalcNews.EntityFrameworkCore/Migrations/20231011233030_NewInitial.cs
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AppNoticas", x => x.Id);
                     table.ForeignKey(
+<<<<<<<< HEAD:src/HalcNews.EntityFrameworkCore/Migrations/20231020220423_initial.cs
                         name: "FK_AppNoticas_AppFuentes_SourceId",
                         column: x => x.SourceId,
+========
+                        name: "FK_AppNoticas_AppFuentes_FuenteId",
+                        column: x => x.FuenteId,
+>>>>>>>> e6ddd6da96ea2c676777a54c9b7fab6a26f47462:src/HalcNews.EntityFrameworkCore/Migrations/20231011233030_NewInitial.cs
                         principalTable: "AppFuentes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -827,15 +875,25 @@ namespace HalcNews.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+<<<<<<<< HEAD:src/HalcNews.EntityFrameworkCore/Migrations/20231020220423_initial.cs
                     DateLectury = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NewId = table.Column<int>(type: "int", nullable: false)
+========
+                    FechaLectura = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NoticiaId = table.Column<int>(type: "int", nullable: false)
+>>>>>>>> e6ddd6da96ea2c676777a54c9b7fab6a26f47462:src/HalcNews.EntityFrameworkCore/Migrations/20231011233030_NewInitial.cs
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AppLectura", x => x.Id);
                     table.ForeignKey(
+<<<<<<<< HEAD:src/HalcNews.EntityFrameworkCore/Migrations/20231020220423_initial.cs
                         name: "FK_AppLectura_AppNoticas_NewId",
                         column: x => x.NewId,
+========
+                        name: "FK_AppLectura_AppNoticas_NoticiaId",
+                        column: x => x.NoticiaId,
+>>>>>>>> e6ddd6da96ea2c676777a54c9b7fab6a26f47462:src/HalcNews.EntityFrameworkCore/Migrations/20231011233030_NewInitial.cs
                         principalTable: "AppNoticas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -1075,6 +1133,7 @@ namespace HalcNews.Migrations
                 column: "UserName");
 
             migrationBuilder.CreateIndex(
+<<<<<<<< HEAD:src/HalcNews.EntityFrameworkCore/Migrations/20231020220423_initial.cs
                 name: "IX_AppLectura_NewId",
                 table: "AppLectura",
                 column: "NewId");
@@ -1088,6 +1147,21 @@ namespace HalcNews.Migrations
                 name: "IX_AppNotificaciones_AlertID",
                 table: "AppNotificaciones",
                 column: "AlertID");
+========
+                name: "IX_AppLectura_NoticiaId",
+                table: "AppLectura",
+                column: "NoticiaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppNoticas_FuenteId",
+                table: "AppNoticas",
+                column: "FuenteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppNotificaciones_AlertaId",
+                table: "AppNotificaciones",
+                column: "AlertaId");
+>>>>>>>> e6ddd6da96ea2c676777a54c9b7fab6a26f47462:src/HalcNews.EntityFrameworkCore/Migrations/20231011233030_NewInitial.cs
 
             migrationBuilder.CreateIndex(
                 name: "IX_OpenIddictApplications_ClientId",
