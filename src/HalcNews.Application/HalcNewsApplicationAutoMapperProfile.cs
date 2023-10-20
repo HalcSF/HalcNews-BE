@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using HalcNews.Fuentes;
 using HalcNews.Noticias;
+using HalcNews.Source;
 using HalcNews.Temas;
 using HalcNews.Themes;
 using HalcNews.ListaNoticias;
