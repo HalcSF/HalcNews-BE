@@ -2,6 +2,9 @@
 using HalcNews.Noticias;
 using HalcNews.Temas;
 using HalcNews.Themes;
+using HalcNews.ListaNoticias;
+using HalcNews.News;
+using HalcNews.NewsList;
 
 namespace HalcNews;
 
@@ -13,6 +16,7 @@ public class HalcNewsApplicationAutoMapperProfile : Profile
          * Alternatively, you can split your mapping configurations
          * into multiple profile classes for a better organization. */
         CreateMap<Theme, ThemeDto>();
-        CreateMap<Noticia, NoticiaDto>();
+        CreateMap<New, NewDto>();
+        CreateMap<NewsListE, NewsListDto>();
     }
 }

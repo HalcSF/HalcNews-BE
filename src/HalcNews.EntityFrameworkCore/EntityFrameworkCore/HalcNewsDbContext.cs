@@ -65,6 +65,8 @@ public class HalcNewsDbContext :
 
     #region Entidades de dominio
     public DbSet<Theme> Themes { get; set; }
+    public DbSet<New> News { get; set; }
+    public DbSet<NewsListE> NewsList { get; set; }
 
     #endregion
 
@@ -107,40 +109,40 @@ public class HalcNewsDbContext :
         });
 
         //Entidad Noticia
-        builder.Entity<Noticia>(b =>
+        builder.Entity<New>(b =>
         {
             b.ToTable(HalcNewsConsts.DbTablePrefix + "Noticas", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
 
-            b.Property(x => x.Autor).IsRequired().HasMaxLength(128);
-            b.Property(x => x.Titulo).IsRequired().HasMaxLength(128);
-            b.Property(x => x.Descripcion).IsRequired();
-            b.Property(x => x.Contenido).IsRequired();
-            b.Property(x => x.Fecha). IsRequired();
+            b.Property(x => x.Author).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Title).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Description).IsRequired();
+            b.Property(x => x.Content).IsRequired();
+            b.Property(x => x.Date). IsRequired();
             b.Property(x => x.Url).IsRequired().HasMaxLength(128);
-            b.Property(x => x.UrlImagen).HasMaxLength(128);
+            b.Property(x => x.UrlImage).HasMaxLength(128);
 
             //Relación con Lectura
 
-            b.HasMany(x => x.Lecturas)
-                .WithOne(x => x.Noticia)
-                .HasForeignKey(x => x.NoticiaId)
+            b.HasMany(x => x.Lecturies)
+                .WithOne(x => x.New)
+                .HasForeignKey(x => x.NewId)
                 .IsRequired();
 
         });
 
         //Entidad ListaNoticias
-        builder.Entity<EListaNoticias>(b =>
+        builder.Entity<NewsListE>(b =>
         {
             b.ToTable(HalcNewsConsts.DbTablePrefix + "ListaNoticias", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
-            b.Property(x => x.Fecha).IsRequired().HasMaxLength(128);
-            b.Property(x => x.Titulo).IsRequired().HasMaxLength(128);
-            b.Property(x => x.Descripcion).IsRequired();
+            b.Property(x => x.Date).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Title).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Description).IsRequired();
         });
 
         //Entidad Notificacion
-        builder.Entity<Notificacion>(b =>
+        builder.Entity<Notification>(b =>
         {
             b.ToTable(HalcNewsConsts.DbTablePrefix + "Notificaciones", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
@@ -151,44 +153,44 @@ public class HalcNewsDbContext :
             .HasForeignKey(x => x.UserId)
             .IsRequired();*/
 
-            b.Property(x => x.Fecha).IsRequired();
-            b.Property(x => x.Texto).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Date).IsRequired();
+            b.Property(x => x.Text).IsRequired().HasMaxLength(128);
             b.Property(x => x.Link).IsRequired();
         });
 
         //Entidad Fuente
-        builder.Entity<Fuente>(b =>
+        builder.Entity<Source>(b =>
         {
             b.ToTable(HalcNewsConsts.DbTablePrefix + "Fuentes", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
-            b.Property(x => x.Nombre).IsRequired();
+            b.Property(x => x.Name).IsRequired();
 
-            b.HasMany(x => x.Noticias)
-            .WithOne(x => x.Fuente)
-            .HasForeignKey(x => x.FuenteId)
+            b.HasMany(x => x.News)
+            .WithOne(x => x.Source)
+            .HasForeignKey(x => x.SourceId)
             .IsRequired();
         });
 
         //Entidad Lectura
-        builder.Entity<Lectura>(b =>
+        builder.Entity<Lectury>(b =>
         {
             b.ToTable(HalcNewsConsts.DbTablePrefix + "Lectura", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
-            b.Property(x => x.FechaLectura).IsRequired();
+            b.Property(x => x.DateLectury).IsRequired();
         });
 
         //Entidad Alerta
-        builder.Entity<Alerta>(b =>
+        builder.Entity<Alert>(b =>
         {
             b.ToTable(HalcNewsConsts.DbTablePrefix + "Alerta", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
-            b.Property(x => x.Busqueda).IsRequired().HasMaxLength(128);
-            b.Property(x => x.FechaEncontrada).IsRequired();
-            b.Property(x => x.Leida).IsRequired();
+            b.Property(x => x.Search).IsRequired().HasMaxLength(128);
+            b.Property(x => x.DateFound).IsRequired();
+            b.Property(x => x.isRead).IsRequired();
 
-            b.HasMany(x => x.Notificaciones)
-                .WithOne(x => x.Alerta)
-                .HasForeignKey(x => x.AlertaId)
+            b.HasMany(x => x.Notifications)
+                .WithOne(x => x.Alert)
+                .HasForeignKey(x => x.AlertID)
                 .IsRequired();
         });
     }

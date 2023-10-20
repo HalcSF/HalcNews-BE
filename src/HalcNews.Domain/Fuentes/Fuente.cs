@@ -8,9 +8,9 @@ using Volo.Abp.Domain.Entities;
 
 namespace HalcNews.Fuentes
 {
-    public class Fuente : Entity<int>
+    public class Source : Entity<int>
     {
-        public string Nombre { get; set; }
-        public ICollection<Noticia> Noticias { get; set; }
+        public string Name { get; set; }
+        public ICollection<New> News { get; set; }
     }
 }
