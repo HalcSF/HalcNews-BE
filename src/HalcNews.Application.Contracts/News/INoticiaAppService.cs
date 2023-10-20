@@ -4,9 +4,9 @@ using System.Text;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 
-namespace HalcNews.Noticias
+namespace HalcNews.News
 {
-    public interface INoticiaAppService : ICrudAppService<NoticiaDto, int>
+    public interface INewAppService : ICrudAppService<NewDto, int>
     {
 
     }

@@ -7,11 +7,11 @@ using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 using HalcNews.ListaNoticias;
 
-namespace HalcNews.ListaNoticias
+namespace HalcNews.NewsList
 {
-    public class ListaNoticiasAppService : CrudAppService<EListaNoticias,ListaNoticiasDto,int>, IListaNoticiasAppService
+    public class NewsListAppService : CrudAppService<NewsListE,NewsListDto,int>, INewsListAppService
     {
-        public ListaNoticiasAppService(IRepository<EListaNoticias, int> repository)
+        public NewsListAppService(IRepository<NewsListE, int> repository)
             : base(repository)
         {
         }

@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 
-namespace HalcNews.Noticias
+namespace HalcNews.News
 {
-    public class NoticiaAppService : CrudAppService<Noticia,NoticiaDto,int> ,INoticiaAppService
+    public class NewAppService : CrudAppService<New,NewDto,int> , INewAppService
     {
-        public NoticiaAppService(IRepository<Noticia,int> repository) 
+        public NewAppService(IRepository<New,int> repository) 
             : base(repository)
-        { 
-
+        {
+            
         }
     }
 }

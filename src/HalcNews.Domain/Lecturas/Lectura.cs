@@ -12,13 +12,13 @@ using Abp.Authorization.Users;
 
 namespace HalcNews.Lecturas
 {
-    public class Lectura : Entity<int>
+    public class Lectury : Entity<int>
     {
-        public DateTime FechaLectura {  get; set; }
+        public DateTime DateLectury {  get; set; }
 
         // asociaciones
         // public AbpUser<> Usuario { get; set; } // esperar resp del profe
-        public Noticia Noticia { get; set; }
-        public int NoticiaId {  get; set; }
+        public New New { get; set; }
+        public int NewId {  get; set; }
     }
 }

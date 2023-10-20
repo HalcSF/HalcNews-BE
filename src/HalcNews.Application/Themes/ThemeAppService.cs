@@ -9,7 +9,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace HalcNews.Themes
 {
-    public class ThemeAppService : CrudAppService<Theme,ThemeDto,int>, IThemeAppService
+    public class ThemeAppService : CrudAppService<Theme,ThemeDto,int>,IThemeAppService
     {
         public ThemeAppService(IRepository<Theme, int> repository)
             : base(repository)

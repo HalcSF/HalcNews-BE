@@ -9,20 +9,20 @@ using Volo.Abp.Domain.Entities;
 
 namespace HalcNews.Noticias
 {
-    public class Noticia : Entity<int>
+    public class New : Entity<int>
     {
-        public string Autor {  get; set; }
-        public string Titulo { get; set; }
-        public string Descripcion { get; set; }
-        public string Contenido { get; set; }
-        public DateTime Fecha { get; set; }
+        public string Author {  get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Content { get; set; }
+        public DateTime Date { get; set; }
         public string Url { get; set; }
-        public string UrlImagen { get; set; }
+        public string UrlImage { get; set; }
 
         // asociaciones
-        public ICollection<Lectura> Lecturas { get; set; }
-        public Fuente Fuente { get; set; }
-        public int FuenteId { get; set; }
+        public ICollection<Lectury> Lecturies { get; set; }
+        public Source Source { get; set; }
+        public int SourceId { get; set; }
 
     }
 }

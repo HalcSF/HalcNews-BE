@@ -8,11 +8,11 @@ using Volo.Abp.Domain.Entities;
 
 namespace HalcNews.ListaNoticias
 {
-    public class EListaNoticias : Entity<int>, INoticia
+    public class NewsListE : Entity<int>
     {
     
-        public DateTime Fecha { get; set; }
-        public string Titulo { get; set; }
-        public string Descripcion { get; set; }
+        public DateTime Date { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
     }
 }
