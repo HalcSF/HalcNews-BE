@@ -18,9 +18,9 @@ using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
-using HalcNews.Notificaciones;
 using HalcNews.Lecturas;
 using HalcNews.Alertas;
+using HalcNews.Carpetas;
 
 namespace HalcNews.EntityFrameworkCore;
 
@@ -112,7 +112,7 @@ public class HalcNewsDbContext :
         //Entidad Noticia
         builder.Entity<New>(b =>
         {
-            b.ToTable(HalcNewsConsts.DbTablePrefix + "Noticas", HalcNewsConsts.DbSchema);
+            b.ToTable(HalcNewsConsts.DbTablePrefix + "News", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
 
             b.Property(x => x.Author).IsRequired().HasMaxLength(128);
@@ -127,55 +127,41 @@ public class HalcNewsDbContext :
 
             b.HasMany(x => x.Lecturies)
                 .WithOne(x => x.New)
-                .HasForeignKey(x => x.NewId)
                 .IsRequired();
+
+            // Relación con NewsList y Folder son configuradas por convencion por EF Core
 
         });
 
         //Entidad ListaNoticias
         builder.Entity<NewsListE>(b =>
         {
-            b.ToTable(HalcNewsConsts.DbTablePrefix + "ListaNoticias", HalcNewsConsts.DbSchema);
+            b.ToTable(HalcNewsConsts.DbTablePrefix + "NewsList", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
             b.Property(x => x.Date).IsRequired().HasMaxLength(128);
             b.Property(x => x.Title).IsRequired().HasMaxLength(128);
             b.Property(x => x.Description).IsRequired();
-        });
 
-        //Entidad Notificacion
-        builder.Entity<Notification>(b =>
-        {
-            b.ToTable(HalcNewsConsts.DbTablePrefix + "Notificaciones", HalcNewsConsts.DbSchema);
-            b.ConfigureByConvention();
-
-            /*
-            b.HasOne(x => x.User)
-            .WithMany()
-            .HasForeignKey(x => x.UserId)
-            .IsRequired();*/
-
-            b.Property(x => x.Date).IsRequired();
-            b.Property(x => x.Text).IsRequired().HasMaxLength(128);
-            b.Property(x => x.Link).IsRequired();
+            // Relación con New y Folder son configuradas por convencion por EF Core
         });
 
         //Entidad Fuente
         builder.Entity<Source>(b =>
         {
-            b.ToTable(HalcNewsConsts.DbTablePrefix + "Fuentes", HalcNewsConsts.DbSchema);
+            b.ToTable(HalcNewsConsts.DbTablePrefix + "Sources", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
             b.Property(x => x.Name).IsRequired();
 
+            //Relación 1 .. * New
             b.HasMany(x => x.News)
             .WithOne(x => x.Source)
-            .HasForeignKey(x => x.SourceId)
             .IsRequired();
         });
 
         //Entidad Lectura
         builder.Entity<Lectury>(b =>
         {
-            b.ToTable(HalcNewsConsts.DbTablePrefix + "Lectura", HalcNewsConsts.DbSchema);
+            b.ToTable(HalcNewsConsts.DbTablePrefix + "Lecturies", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
             b.Property(x => x.DateLectury).IsRequired();
         });
@@ -183,16 +169,21 @@ public class HalcNewsDbContext :
         //Entidad Alerta
         builder.Entity<Alert>(b =>
         {
-            b.ToTable(HalcNewsConsts.DbTablePrefix + "Alerta", HalcNewsConsts.DbSchema);
+            b.ToTable(HalcNewsConsts.DbTablePrefix + "Alerts", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
             b.Property(x => x.Search).IsRequired().HasMaxLength(128);
             b.Property(x => x.DateFound).IsRequired();
             b.Property(x => x.isRead).IsRequired();
+        });
 
-            b.HasMany(x => x.Notifications)
-                .WithOne(x => x.Alert)
-                .HasForeignKey(x => x.AlertID)
-                .IsRequired();
+        builder.Entity<Folder>(b =>
+        {
+            b.ToTable(HalcNewsConsts.DbTablePrefix + "Folders", HalcNewsConsts.DbSchema);
+            b.ConfigureByConvention();
+            // Relación con NewsList y New son configuradas por convencion por EF Core
+            // Relación 0.1 .. * Alert
+            b.HasMany(x => x.Alerts)
+                .WithOne(x => x.Folder);
         });
     }
 }

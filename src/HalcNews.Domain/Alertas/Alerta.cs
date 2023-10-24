@@ -1,5 +1,7 @@
-﻿using HalcNews.Lecturas;
-using HalcNews.Notificaciones;
+﻿using Abp.Authorization.Users;
+using HalcNews.Carpetas;
+using HalcNews.Lecturas;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +15,13 @@ namespace HalcNews.Alertas
    
         public string Search {get; set;}
         public DateTime DateFound { get; set; }
-        public ICollection<Notification> Notifications { get; set; }
         public bool isRead { get; set; }
+        
+        // 1 .. * Usuario ?
+        // public IdentityUser Usuario { get; set; }
+
+        // 1 .. 0.1 Folder
+        public Folder Folder { get; set; }
+       
     }
 }

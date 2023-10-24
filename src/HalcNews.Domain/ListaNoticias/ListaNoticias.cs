@@ -1,4 +1,6 @@
-﻿using HalcNews.INoticias;
+﻿using HalcNews.Carpetas;
+using HalcNews.INoticias;
+using HalcNews.Noticias;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +12,13 @@ namespace HalcNews.ListaNoticias
 {
     public class NewsListE : Entity<int>
     {
-    
         public DateTime Date { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+
+        // * .. * Folder
+        public ICollection<Folder> Folders { get; set; }
+        // * .. * News
+        public ICollection<New> News { get; set; }
     }
 }
