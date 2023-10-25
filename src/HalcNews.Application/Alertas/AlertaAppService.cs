@@ -1,4 +1,4 @@
-﻿using HalcNews.ListaNoticias;
+﻿using HalcNews.Alertas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 
-namespace HalcNews.NewsList
+namespace HalcNews.Alertas
 {
-    public class NewsListAppService : CrudAppService<NewsListE,NewsListDto,int>, INewsListAppService
+    public class AlertaAppService : CrudAppService<Alert, AlertDto, int>, IAlertaAppService
     {
-        public NewsListAppService(IRepository<NewsListE, int> repository)
+        public AlertaAppService(IRepository<Alert, int> repository)
             : base(repository)
         {
         }

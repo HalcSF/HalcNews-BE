@@ -1,4 +1,4 @@
-﻿using HalcNews.ListaNoticias;
+﻿using HalcNews.Fuentes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 
-namespace HalcNews.NewsList
+namespace HalcNews.Fuentes
 {
-    public class NewsListAppService : CrudAppService<NewsListE,NewsListDto,int>, INewsListAppService
+    public class FuenteAppService : CrudAppService<Source, SourceDto, int>, IFuenteAppService
     {
-        public NewsListAppService(IRepository<NewsListE, int> repository)
+        public FuenteAppService(IRepository<Source, int> repository)
             : base(repository)
         {
         }
     }
 }
+

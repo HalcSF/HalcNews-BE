@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Volo.Abp.Application.Services;
 
-namespace HalcNews.Source
+namespace HalcNews.Alertas
 {
-    public interface IFuenteAppService : ICrudAppService<FuenteDto, int>
+    public interface IAlertaAppService : ICrudAppService<AlertDto, int>
     {
     }
 }
