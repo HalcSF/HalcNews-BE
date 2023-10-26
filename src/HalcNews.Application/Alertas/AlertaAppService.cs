@@ -9,9 +9,9 @@ using Volo.Abp.Domain.Repositories;
 
 namespace HalcNews.Alertas
 {
-    public class AlertaAppService : CrudAppService<Alert, AlertDto, int>, IAlertaAppService
+    public class AlertAppService : CrudAppService<Alert, AlertDto, int>, IAlertAppService
     {
-        public AlertaAppService(IRepository<Alert, int> repository)
+        public AlertAppService(IRepository<Alert, int> repository)
             : base(repository)
         {
         }

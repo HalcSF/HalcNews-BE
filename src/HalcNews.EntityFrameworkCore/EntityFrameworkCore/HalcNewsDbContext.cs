@@ -21,6 +21,7 @@ using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using HalcNews.Lecturas;
 using HalcNews.Alertas;
 using HalcNews.Carpetas;
+using Microsoft.Identity.Client;
 
 namespace HalcNews.EntityFrameworkCore;
 
@@ -64,9 +65,14 @@ public class HalcNewsDbContext :
 
 
     #region Entidades de dominio
-    public DbSet<Theme> themes { get; set; }
-    public DbSet<New> news { get; set; }
-    public DbSet<NewsListE> newsList { get; set; }
+    public DbSet<Theme> Themes { get; set; }
+    public DbSet<New> News { get; set; }
+    public DbSet<NewsListE> NewsList { get; set; }
+    public DbSet<Folder> Folders { get; set; }
+    public DbSet<Alert> Alerts { get; set; }
+    public DbSet<Lectury> Lecturies { get; set; }
+    public DbSet<Source> Sources { get; set; }
+
 
 
     #endregion

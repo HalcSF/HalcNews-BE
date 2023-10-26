@@ -5,7 +5,7 @@ using Volo.Abp.Application.Services;
 
 namespace HalcNews.Lecturas
 {
-    public interface ILecturaAppService : ICrudAppService<LecturyDto, int>
+    public interface ILecturyAppService : ICrudAppService<LecturyDto, int>
     {
     }
 }

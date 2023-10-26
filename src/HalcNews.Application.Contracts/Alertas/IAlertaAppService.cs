@@ -5,7 +5,7 @@ using Volo.Abp.Application.Services;
 
 namespace HalcNews.Alertas
 {
-    public interface IAlertaAppService : ICrudAppService<AlertDto, int>
+    public interface IAlertAppService : ICrudAppService<AlertDto, int>
     {
     }
 }

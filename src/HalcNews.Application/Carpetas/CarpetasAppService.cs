@@ -1,5 +1,4 @@
-﻿using HalcNews.Lecturas;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,11 +6,11 @@ using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 
-namespace HalcNews.Lecturas
+namespace HalcNews.Carpetas
 {
-    public class LecturyAppService : CrudAppService<Lectury, LecturyDto, int>, ILecturyAppService
+    public class FolderAppService : CrudAppService<Folder, FolderDto, int>, IFolderAppService
     {
-        public LecturyAppService(IRepository<Lectury, int> repository)
+        public FolderAppService(IRepository<Folder, int> repository)
             : base(repository)
         {
         }

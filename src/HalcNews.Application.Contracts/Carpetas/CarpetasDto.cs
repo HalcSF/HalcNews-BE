@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using Volo.Abp.Application.Dtos;
 
-namespace HalcNews.Source
+namespace HalcNews.Carpetas
 {
-    public class FuenteDto : EntityDto<int>
+    public class FolderDto : EntityDto<int>
     {
         public string Name { get; set; }
+        public string Description { get; set; }
+
     }
 }

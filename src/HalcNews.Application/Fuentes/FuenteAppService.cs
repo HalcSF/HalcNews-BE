@@ -9,9 +9,9 @@ using Volo.Abp.Domain.Repositories;
 
 namespace HalcNews.Fuentes
 {
-    public class FuenteAppService : CrudAppService<Source, SourceDto, int>, IFuenteAppService
+    public class SourceAppService : CrudAppService<Source, SourceDto, int>, ISourceAppService
     {
-        public FuenteAppService(IRepository<Source, int> repository)
+        public SourceAppService(IRepository<Source, int> repository)
             : base(repository)
         {
         }

@@ -1,5 +1,4 @@
-﻿using Abp.Domain.Entities;
-using HalcNews.Alertas;
+﻿using HalcNews.Alertas;
 using HalcNews.ListaNoticias;
 using HalcNews.Noticias;
 using System;
@@ -7,11 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Volo.Abp.Domain.Entities;
 
 namespace HalcNews.Carpetas
 {
     public class Folder : Entity<int>
-    { 
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
         // * .. * News
         public ICollection<New> News { get; set; }
         // *..* NewsList

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Volo.Abp.Application.Services;
 
-namespace HalcNews.Source
+namespace HalcNews.Carpetas
 {
-    public interface IFuenteAppService : ICrudAppService<FuenteDto, int>
+    public interface IFolderAppService : ICrudAppService<FolderDto, int>
     {
     }
 }

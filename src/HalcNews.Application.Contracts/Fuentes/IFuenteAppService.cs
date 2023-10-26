@@ -5,7 +5,7 @@ using Volo.Abp.Application.Services;
 
 namespace HalcNews.Fuentes
 {
-    public interface IFuenteAppService : ICrudAppService<SourceDto, int>
+    public interface ISourceAppService : ICrudAppService<SourceDto, int>
     {
     }
 }

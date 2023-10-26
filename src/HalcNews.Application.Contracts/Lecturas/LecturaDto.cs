@@ -7,6 +7,6 @@ namespace HalcNews.Lecturas
 {
     public class LecturyDto: EntityDto<int>
     {
-        public DateTime FechaLectura { get; set;}
+        public DateTime DateLectury { get; set;}
     }
 }

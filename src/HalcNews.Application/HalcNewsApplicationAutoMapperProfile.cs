@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using HalcNews.Fuentes;
 using HalcNews.Noticias;
-using HalcNews.Source;
 using HalcNews.Temas;
 using HalcNews.Themes;
 using HalcNews.ListaNoticias;
 using HalcNews.News;
 using HalcNews.NewsList;
+using HalcNews.Lecturas;
+using HalcNews.Alertas;
+using HalcNews.Carpetas;
 
 namespace HalcNews;
 
@@ -20,5 +22,9 @@ public class HalcNewsApplicationAutoMapperProfile : Profile
         CreateMap<Theme, ThemeDto>();
         CreateMap<New, NewDto>();
         CreateMap<NewsListE, NewsListDto>();
+        CreateMap<Source, SourceDto>();
+        CreateMap<Lectury, LecturyDto>();
+        CreateMap<Alert, AlertDto>();
+        CreateMap<Folder, FolderDto>();
     }
 }
