@@ -1,5 +1,4 @@
 ﻿using HalcNews.Carpetas;
-using HalcNews.INoticias;
 using HalcNews.Noticias;
 using System;
 using System.Collections.Generic;
