@@ -30,7 +30,7 @@ public class HalcNewsHttpApiClientModule : AbpModule
             RemoteServiceName
         );
 
-        Configure<AbpVirtualFileSystemOptions>(options =>
+        Configure<AbpVirtualFileSystemOptions>(options => 
         {
             options.FileSets.AddEmbedded<HalcNewsHttpApiClientModule>();
         });
