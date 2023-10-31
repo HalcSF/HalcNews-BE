@@ -6,8 +6,10 @@ using NewsAPI;
 using NewsAPI.Models;
 using NewsAPI.Constants;
 
-namespace HalcNews.ApiNews { 
-public class HandlerApiNews { 
+namespace HalcNews.ApiNews
+{
+    public class HandlerApiNews
+    {
         NewsApiClient newsApiClient;
 
         public HandlerApiNews()
@@ -25,7 +27,7 @@ public class HandlerApiNews {
                 PageSize = NewsQuantity ?? 20
 
             });
-                
+
             if (articlesResponse.Status == Statuses.Ok)
             {
                 string jsonResult = JsonConvert.SerializeObject(articlesResponse);
@@ -35,7 +37,7 @@ public class HandlerApiNews {
             else
             {
                 throw new ApplicationException("No se pudieron obtener noticias desde NewsAPI, error: " + articlesResponse.Status);
-            }    
+            }
         }
-        
+    }
 }
