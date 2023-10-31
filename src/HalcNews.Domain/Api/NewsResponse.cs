@@ -3,13 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HalcNews.ApiNews
+namespace HalcNews.Api
 {
     public class NewsResponse
     {
         public string Status { get; set; }
         public int TotalResults { get; set; }
-        public ICollection<Article> Articles { get; set; } 
+        public ICollection<Article> Articles { get; set; }
 
     }
 
@@ -38,8 +38,8 @@ namespace HalcNews.ApiNews
         public string Name { get; set; }
         public string Description { get; set; }
         public string Url { get; set; }
-        public string Category { get; set;}
-        public string Lenguage { get; set;}
+        public string Category { get; set; }
+        public string Lenguage { get; set; }
         public string Country { get; set; }
     }
 }

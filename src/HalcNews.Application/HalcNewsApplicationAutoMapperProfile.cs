@@ -26,5 +26,5 @@ public class HalcNewsApplicationAutoMapperProfile : Profile
         CreateMap<Lectury, LecturyDto>();
         CreateMap<Alert, AlertDto>();
         CreateMap<Folder, FolderDto>();
-    }
+    } 
 }
