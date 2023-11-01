@@ -9,6 +9,6 @@ namespace HalcNews.Api
 {
         public interface IApiNewsAppService : IApplicationService
         {
-        Task<string> GetNews(string? Search, int? NewsQuantity);
+        Task<string> GetNews(string? Search);
         }
     }

@@ -17,14 +17,13 @@ namespace HalcNews.ApiNews
             newsApiClient = new NewsApiClient("1967620b6fd64daf89307eec6ece4a14"); 
         }
 
-        public async Task<string> GetNews(string? Search, int? NewsQuantity)
+        public async Task<string> GetNews(string? Search)
         {
             var articlesResponse = await newsApiClient.GetEverythingAsync(new EverythingRequest
             {
-                Q = Search ?? "news", //si no hay parámetro de entrada, se busca news, un filtro de noticias en gral
+                Q = Search ?? " Apple", //si no hay parámetro de entrada, se busca news, un filtro de noticias en gral
                 SortBy = SortBys.Popularity,
                 Language = Languages.ES, // ver lógica para implementar lenguaje del usuario
-                PageSize = NewsQuantity ?? 15
 
             });
 
