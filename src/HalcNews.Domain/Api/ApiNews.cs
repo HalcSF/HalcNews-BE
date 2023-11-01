@@ -14,7 +14,7 @@ namespace HalcNews.ApiNews
 
         public HandlerApiNews()
         {
-            newsApiClient = new NewsApiClient("1967620b6fd64daf89307eec6ece4a14");
+            newsApiClient = new NewsApiClient("1967620b6fd64daf89307eec6ece4a14"); 
         }
 
         public async Task<string> GetNews(string? Search, int? NewsQuantity)
@@ -24,7 +24,7 @@ namespace HalcNews.ApiNews
                 Q = Search ?? "news", //si no hay parámetro de entrada, se busca news, un filtro de noticias en gral
                 SortBy = SortBys.Popularity,
                 Language = Languages.ES, // ver lógica para implementar lenguaje del usuario
-                PageSize = NewsQuantity ?? 20
+                PageSize = NewsQuantity ?? 15
 
             });
 
