@@ -8,7 +8,7 @@ using NewsAPI.Constants;
 
 namespace HalcNews.ApiNews
 {
-    public class HandlerApiNews
+    public class HandlerApiNews 
     {
         NewsApiClient newsApiClient;
 
