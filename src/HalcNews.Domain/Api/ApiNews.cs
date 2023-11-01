@@ -17,9 +17,9 @@ namespace HalcNews.ApiNews
             newsApiClient = new NewsApiClient("1967620b6fd64daf89307eec6ece4a14");
         }
 
-        public Task<string> GetNews(string? Search, int? NewsQuantity)
+        public async Task<string> GetNews(string? Search, int? NewsQuantity)
         {
-            var articlesResponse = newsApiClient.GetEverything(new EverythingRequest
+            var articlesResponse = await newsApiClient.GetEverythingAsync(new EverythingRequest
             {
                 Q = Search ?? "news", //si no hay parámetro de entrada, se busca news, un filtro de noticias en gral
                 SortBy = SortBys.Popularity,
@@ -32,7 +32,7 @@ namespace HalcNews.ApiNews
             {
                 string jsonResult = JsonConvert.SerializeObject(articlesResponse);
 
-                return Task.FromResult(jsonResult);
+                return jsonResult;
             }
             else
             {
