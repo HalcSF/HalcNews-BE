@@ -21,7 +21,7 @@ namespace HalcNews.ApiNews
         {
             var articlesResponse = await newsApiClient.GetEverythingAsync(new EverythingRequest
             {
-                Q = Search ?? " Apple", //si no hay parámetro de entrada, se busca news, un filtro de noticias en gral
+                Q = Search ?? "Apple", //si no hay parámetro de entrada, se busca news, un filtro de noticias en gral
                 SortBy = SortBys.Popularity,
                 Language = Languages.ES, // ver lógica para implementar lenguaje del usuario
 

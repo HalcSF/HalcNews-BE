@@ -36,7 +36,7 @@ namespace HalcNews.Migrations
 
                     b.HasIndex("NewsId");
 
-                    b.ToTable("FolderNew");
+                    b.ToTable("FolderNew", (string)null);
                 });
 
             modelBuilder.Entity("FolderNewsListE", b =>
@@ -51,7 +51,7 @@ namespace HalcNews.Migrations
 
                     b.HasIndex("NewsListsId");
 
-                    b.ToTable("FolderNewsListE");
+                    b.ToTable("FolderNewsListE", (string)null);
                 });
 
             modelBuilder.Entity("HalcNews.Alertas.Alert", b =>
@@ -247,7 +247,7 @@ namespace HalcNews.Migrations
 
                     b.HasIndex("NewsListsId");
 
-                    b.ToTable("NewNewsListE");
+                    b.ToTable("NewNewsListE", (string)null);
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>

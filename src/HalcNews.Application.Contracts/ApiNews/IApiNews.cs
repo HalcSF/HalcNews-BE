@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 
-namespace HalcNews.Api
+namespace HalcNews.ApiNews
 {
         public interface IApiNewsAppService : IApplicationService
         {
