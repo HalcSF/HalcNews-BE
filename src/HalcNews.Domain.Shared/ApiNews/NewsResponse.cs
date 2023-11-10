@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HalcNews.Api
+namespace HalcNews.ApiNews
 {
     public class NewsResponse
     {
         public string Status { get; set; }
         public int TotalResults { get; set; }
-        public ICollection<Article> Articles { get; set; }
+        public ICollection<ArticleDto> Articles { get; set; }
 
     }
 
-    public class Article
+    public class ArticleDto
     {
-        public Source Source { get; set; }
+        // public Source Source { get; set; }
         public string Author { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }

@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Volo.Abp.Application.Services;
 
 namespace HalcNews.ApiNews
 {
-        public interface IApiNewsAppService : IApplicationService
+        public interface IApiNews
         {
-        Task<string> GetNews(string? Search);
+        Task<ICollection<ArticleDto>> GetNewsAsync(string? Search);
         }
     }

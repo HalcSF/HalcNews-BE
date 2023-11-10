@@ -2,6 +2,7 @@
 using Shouldly;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace HalcNews.NewsList
 
             //Assert
             newsList.ShouldNotBeNull();
+            newsList.Count.ShouldBe(1);
         }
     }
 }

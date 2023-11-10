@@ -9,6 +9,7 @@ using HalcNews.NewsList;
 using HalcNews.Lecturas;
 using HalcNews.Alertas;
 using HalcNews.Carpetas;
+using HalcNews.ApiNews;
 
 namespace HalcNews;
 
@@ -22,9 +23,10 @@ public class HalcNewsApplicationAutoMapperProfile : Profile
         CreateMap<Theme, ThemeDto>();
         CreateMap<New, NewDto>();
         CreateMap<NewsListE, NewsListDto>();
-        CreateMap<Source, SourceDto>();
+        CreateMap<Fuentes.Source, SourceDto>();
         CreateMap<Lectury, LecturyDto>();
         CreateMap<Alert, AlertDto>();
         CreateMap<Folder, FolderDto>();
+        CreateMap<NewDto, ArticleDto>().ReverseMap();
     } 
 }

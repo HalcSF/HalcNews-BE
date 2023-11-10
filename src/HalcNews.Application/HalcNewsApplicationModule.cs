@@ -1,4 +1,7 @@
-﻿using Volo.Abp.Account;
+﻿using HalcNews.ApiNews;
+using HalcNews.News;
+using Microsoft.Extensions.DependencyInjection;
+using Volo.Abp.Account;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
@@ -27,5 +30,6 @@ public class HalcNewsApplicationModule : AbpModule
         {
             options.AddMaps<HalcNewsApplicationModule>();
         });
+    context.Services.AddTransient<IApiNews, ApiNewsService>();
     }
 }
