@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 
+
 namespace HalcNews.ApiNews
 {
     public class ApiNewsAppService : HalcNewsAppService, IApiNewsAppService

@@ -20,13 +20,13 @@ public class HalcNewsApplicationAutoMapperProfile : Profile
         /* You can configure your AutoMapper mapping configuration here.
          * Alternatively, you can split your mapping configurations
          * into multiple profile classes for a better organization. */
-        CreateMap<Theme, ThemeDto>();
-        CreateMap<New, NewDto>();
-        CreateMap<NewsListE, NewsListDto>();
-        CreateMap<Fuentes.Source, SourceDto>();
-        CreateMap<Lectury, LecturyDto>();
-        CreateMap<Alert, AlertDto>();
-        CreateMap<Folder, FolderDto>();
+        CreateMap<Theme, ThemeDto>().ReverseMap();
+        CreateMap<New, NewDto>().ReverseMap();
+        CreateMap<NewsListE, NewsListDto>().ReverseMap();
+        CreateMap<Fuentes.Source, SourceDto>().ReverseMap();
+        CreateMap<Lectury, LecturyDto>().ReverseMap();
+        CreateMap<Alert, AlertDto>().ReverseMap();
+        CreateMap<Folder, FolderDto>().ReverseMap();
         CreateMap<NewDto, ArticleDto>().ReverseMap();
     } 
 }

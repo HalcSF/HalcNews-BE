@@ -26,7 +26,6 @@ public class HalcNewsTestDataSeedContributor : IDataSeedContributor, ITransientD
             Date = DateTime.Now,
             Title = "Título",
             Description ="Descripción"
-
         });
     }
 }

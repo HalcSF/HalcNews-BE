@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
+using Volo.Abp.ObjectMapping;
 
 namespace HalcNews.NewsList
 {
@@ -30,5 +31,21 @@ namespace HalcNews.NewsList
 
             return ObjectMapper.Map<NewsListE, NewsListDto>(NewsList);
         }
+
+        public async Task InsertNewsListAync(NewsListDto newsList)
+        {
+            var newsListMapped = ObjectMapper.Map<NewsListDto,NewsListE>(newsList);
+
+            await _repository.InsertAsync(newsListMapped);
+        }
+
+        public async Task UpdateNewsListAync(NewsListDto newsList)
+        {
+            var newsListMapped = ObjectMapper.Map<NewsListDto, NewsListE>(newsList);
+
+            await _repository.UpdateAsync(newsListMapped);
+        }
+
+
     }
 }
