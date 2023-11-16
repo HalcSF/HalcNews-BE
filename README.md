@@ -17,3 +17,6 @@ El backend debe ser capaz de:
 7.Ejecutar asincronicamente una función que busque los textos de las alertas en la API y persista la información de las notificaciones. Opcional envío de mail.
 
 8.Obtener información estadística de monitoreo de los accesos a la API.
+
+Todos los métodos deberán tener pruebas unitarias y/o de integración.
+
