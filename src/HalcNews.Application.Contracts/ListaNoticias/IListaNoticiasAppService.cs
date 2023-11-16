@@ -13,5 +13,6 @@ namespace HalcNews.NewsList
         Task<NewsListDto> GetNewsListAsync(int id);
         Task InsertNewsListAync(NewsListDto newsList);
         Task UpdateNewsListAync(NewsListDto newsList);
+        Task RemoveNewsListAync(NewsListDto newsList);
     }
 }

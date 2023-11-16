@@ -46,6 +46,12 @@ namespace HalcNews.NewsList
             await _repository.UpdateAsync(newsListMapped);
         }
 
+        public async Task RemoveNewsListAync(NewsListDto newsList)
+        {
+            var newsListMapped = ObjectMapper.Map<NewsListDto, NewsListE>(newsList);
+            await _repository.DeleteAsync(newsListMapped);
+        }
+
 
     }
 }

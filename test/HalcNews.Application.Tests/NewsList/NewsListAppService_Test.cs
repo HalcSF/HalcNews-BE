@@ -46,9 +46,9 @@ namespace HalcNews.NewsList
 
             //Act
             await _NewsListAppService.InsertNewsListAync(newsList);
+            var newsListResponse = await _NewsListAppService.GetNewsListAsync();
 
             //Assert
-            var newsListResponse = await _NewsListAppService.GetNewsListAsync();
             newsListResponse.ShouldNotBeNull();
             newsListResponse.Count.ShouldBe(2);
         }
@@ -59,16 +59,29 @@ namespace HalcNews.NewsList
         {
             //Arrage
             var newsListResponse = await _NewsListAppService.GetNewsListAsync(1);
-
+            
             //Act
             newsListResponse.Title.ShouldBe("Título");
             newsListResponse.Title = "Título2";
-
-            //Assert
             await _NewsListAppService.UpdateNewsListAync(newsListResponse);
+            //Assert
 
             newsListResponse.Title.ShouldBe("Título2");
         }
+
+        [Fact]
+        public async Task Should_Remove()
+        {
+            //Arrage
+            var newsListResponse = await _NewsListAppService.GetNewsListAsync(1);
+            //Act
+            await _NewsListAppService.RemoveNewsListAync(newsListResponse);
+            //Assert
+            var newsList = await _NewsListAppService.GetNewsListAsync();
+
+            newsList.Count.ShouldBe(0);
+        }
+
 
     }
 }
