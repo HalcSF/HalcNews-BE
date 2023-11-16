@@ -9,19 +9,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.ObjectMapping;
+using NewsAPI.Constants;
+using NewsAPI.Models;
 
 namespace HalcNews.Busqueda
 {
     public class SearchAppService : HalcNewsAppService, ISearchAppService
     {
         private readonly IApiNewsAppService _IApiNewsAppService;
-        private readonly ISearchAppService _ISearchAppService;
         private readonly INewsListAppService _INewsListAppService;
         private readonly INewAppService _INewAppService;
-        public SearchAppService(IApiNewsAppService apiNewsAppService, ISearchAppService searchAppService, INewsListAppService newsListAppService, INewAppService newAppService)
+        public SearchAppService(IApiNewsAppService apiNewsAppService, INewsListAppService newsListAppService, INewAppService newAppService)
         {
             _IApiNewsAppService = apiNewsAppService;
-            _ISearchAppService = searchAppService;
             _INewsListAppService = newsListAppService;
             _INewAppService = newAppService;
         }
@@ -29,12 +29,12 @@ namespace HalcNews.Busqueda
         public async Task<Search> SearchNews(string keyword)
         {
             var news = await _IApiNewsAppService.Search(keyword);
-            var search = new Search();
 
-            search.Keyword = keyword;
-            search.News = news; //newsDto
-            
-            return search;
+            return new Search
+            {
+                Keyword = keyword,
+                News = news
+            };
         }
         public async Task SaveSearch(NewsListDto newsList, Search search)
         {
