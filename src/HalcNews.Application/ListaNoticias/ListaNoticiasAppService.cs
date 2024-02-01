@@ -20,7 +20,7 @@ namespace HalcNews.NewsList
 
         public async Task<ICollection<NewsListDto>> GetNewsListAsync()
         {
-            var newsList = await _repository.GetListAsync();
+            var newsList = await _repository.GetListAsync(includeDetails: true);
 
             return ObjectMapper.Map<ICollection<NewsListE>, ICollection<NewsListDto>>(newsList);
         }

@@ -71,7 +71,7 @@ public class HalcNewsDbContext :
     public DbSet<Folder> Folders { get; set; }
     public DbSet<Alert> Alerts { get; set; }
     public DbSet<Lectury> Lecturies { get; set; }
-    public DbSet<Source> Sources { get; set; }
+    //public DbSet<Source> Sources { get; set; }
 
 
 
@@ -152,17 +152,17 @@ public class HalcNewsDbContext :
         });
 
         //Entidad Fuente
-        builder.Entity<Source>(b =>
-        {
-            b.ToTable(HalcNewsConsts.DbTablePrefix + "Sources", HalcNewsConsts.DbSchema);
-            b.ConfigureByConvention();
-            b.Property(x => x.Name).IsRequired();
+        //builder.Entity<Source>(b =>
+        //{
+        //    b.ToTable(HalcNewsConsts.DbTablePrefix + "Sources", HalcNewsConsts.DbSchema);
+        //    b.ConfigureByConvention();
+        //    b.Property(x => x.Name).IsRequired();
 
-            //Relación 1 .. * New
-            b.HasMany(x => x.News)
-            .WithOne(x => x.Source)
-            .IsRequired();
-        });
+        //    //Relación 1 .. * New
+        //    b.HasMany(x => x.News)
+        //    .WithOne(x => x.Source)
+        //    .IsRequired();
+        //});
 
         //Entidad Lectura
         builder.Entity<Lectury>(b =>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HalcNews.Busqueda;
+using HalcNews.ListaNoticias;
 using HalcNews.News;
 using HalcNews.NewsList;
 using Shouldly;
@@ -43,19 +44,23 @@ namespace HalcNews.Search
         [Fact]
         public async Task Should_SaveSearch()
         {
-            //Arrage
+            // Obtener la NewsList de la base de datos después de guardar la búsqueda
+            var newsListList = await _NewsListAppService.GetNewsListAsync();
+            var firstNewsList = newsListList.FirstOrDefault();
+
+            // Realiza la búsqueda de noticias
             var search = await _SearchAppService.SearchNews("Apple");
-            var newsList = await _NewsListAppService.GetNewsListAsync(1);
-           
-            //Act
-            await _SearchAppService.SaveSearch(newsList, search);
-            var response = await _NewAppService.GetNewsAsync();
 
-            //Assert
-            response.ShouldBeEmpty();
+            // Act
+            await _SearchAppService.SaveSearch(firstNewsList, search);
 
+            // Obtén la instancia actualizada de la base de datos
+
+            // Actualiza la NewsList solo si es necesario, según tus necesidades
             
-        }
 
+            firstNewsList.News.Count.ShouldBeGreaterThan(0);
+
+        }
     }
 }

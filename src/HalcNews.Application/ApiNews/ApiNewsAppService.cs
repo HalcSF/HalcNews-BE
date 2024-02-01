@@ -1,4 +1,5 @@
 ﻿using HalcNews.News;
+using NewsAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,8 @@ namespace HalcNews.ApiNews
         public async Task<ICollection<NewDto>> Search(string? Search)
         {
             var news = await _apiNews.GetNewsAsync(Search);
-            return ObjectMapper.Map<ICollection<ArticleDto>, ICollection<NewDto>>(news);
+
+            return ManualMapper.MapArticlesToNews(news);
         }
 
 

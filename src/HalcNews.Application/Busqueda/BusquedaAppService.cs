@@ -38,25 +38,18 @@ namespace HalcNews.Busqueda
         }
         public async Task SaveSearch(NewsListDto newsList, Search search)
         {
-            // Para cada resultado de search.News, agregar a newsList.News.Add(new)
-            // Para esto, tengo que poder guardar las News como entidad New en la Db y asociarle a NewsList cada una de estas.
             var newsResponse = search.News;
 
-            foreach (NewDto newE in newsResponse)
+            foreach (NewDto newDto in newsResponse)
             {
-                //agrega la entidad NewE a la base de datos
-                var newMapped = ObjectMapper.Map<NewDto,New>(newE);
-                await _INewAppService.InsertNewAync(newE);
+                await _INewAppService.InsertNewAync(newDto);
 
-                //asocia la newsList con la newE
-                var newsListMapped = ObjectMapper.Map<NewsListDto, NewsListE>(newsList);
-                newsListMapped.News.Add(newMapped);
-
-                //actualiza la newsList en la base de datos
-                newsList = ObjectMapper.Map<NewsListE,NewsListDto >(newsListMapped);
-                await _INewsListAppService.UpdateNewsListAync(newsList);
+                // Asociar la noticia 
+                newsList.News.Add(newDto);
             }
 
+            // Actualizar la lista en la base de datos después de agregar todas las noticias
+            await _INewsListAppService.UpdateNewsListAync(newsList);
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using HalcNews.ApiNews;
 using HalcNews.ListaNoticias;
+using HalcNews.Noticias;
 using HalcNews.Temas;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
@@ -25,7 +27,8 @@ public class HalcNewsTestDataSeedContributor : IDataSeedContributor, ITransientD
         {
             Date = DateTime.Now,
             Title = "Título",
-            Description ="Descripción"
+            Description ="Descripción",
+            News = new List<New>(),
         });
     }
 }
