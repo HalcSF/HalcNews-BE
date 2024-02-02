@@ -14,15 +14,15 @@ namespace HalcNews.Alertas
     public class Alert : Entity<int>
     {
 
-        public string Search { get; set; }
-        public DateTime DateFound { get; set; }
-        public bool isRead { get; set; }
-
-        // 1 .. * Usuario ?
-        // public IdentityUser Usuario { get; set; }
+        public string Search { get; set; } = "";
+        public DateTime CreationDate { get; set; } = DateTime.Now;
+        public bool isActive { get; set; } = true;
 
         // 1 .. 0.1 Folder
         public Folder? Folder { get; set; }
+
+        // 1 .. * Notifications
+        public ICollection<Notification>? Notifications { get; set; }
 
     }
 }

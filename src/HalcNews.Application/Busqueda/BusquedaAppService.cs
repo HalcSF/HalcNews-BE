@@ -61,7 +61,7 @@ namespace HalcNews.Busqueda
             {
                 Search = keyword,
                 DateFound = DateTime.Now,
-                isRead = false,
+                isActive = true,
             };
 
             //var newAlertMapped = ObjectMapper.Map<AlertDto, Alert>(newAlert);

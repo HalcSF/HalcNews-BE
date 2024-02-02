@@ -47,7 +47,7 @@ namespace HalcNews.Search
         [Fact]
         public async Task Should_SaveSearch()
         {
-            // Obtener la NewsList de la base de datos después de guardar la búsqueda
+            
             var newsListList = await _NewsListAppService.GetNewsListAsync();
             var firstNewsList = newsListList.FirstOrDefault();
 
@@ -56,10 +56,6 @@ namespace HalcNews.Search
 
             // Act
             await _SearchAppService.SaveSearch(firstNewsList, search);
-
-            // Obtén la instancia actualizada de la base de datos
-
-            // Actualiza la NewsList solo si es necesario, según tus necesidades
             
 
             firstNewsList.News.Count.ShouldBeGreaterThan(0);

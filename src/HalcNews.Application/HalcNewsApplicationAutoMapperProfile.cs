@@ -28,5 +28,6 @@ public class HalcNewsApplicationAutoMapperProfile : Profile
         CreateMap<Alert, AlertDto>().ReverseMap();
         CreateMap<Folder, FolderDto>().ReverseMap();
         CreateMap<NewDto, ArticleDto>().ReverseMap();
+        CreateMap<Notification, NotificationDto>().ReverseMap();
     } 
 }

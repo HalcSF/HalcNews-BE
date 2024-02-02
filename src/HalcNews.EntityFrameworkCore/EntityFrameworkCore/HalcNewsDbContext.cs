@@ -71,6 +71,7 @@ public class HalcNewsDbContext :
     public DbSet<Folder> Folders { get; set; }
     public DbSet<Alert> Alerts { get; set; }
     public DbSet<Lectury> Lecturies { get; set; }
+    public DbSet<Notification> Notifications { get; set; }
     //public DbSet<Source> Sources { get; set; }
 
 
@@ -178,6 +179,17 @@ public class HalcNewsDbContext :
             b.ToTable(HalcNewsConsts.DbTablePrefix + "Alerts", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
             b.Property(x => x.Search).IsRequired().HasMaxLength(128);
+            b.Property(x => x.CreationDate).IsRequired();
+            b.Property(x => x.isActive).IsRequired();
+
+            b.HasMany(x => x.Notifications)
+                .WithOne(x => x.Alert);
+        });
+
+        builder.Entity<Notification>(b =>
+        {
+            b.ToTable(HalcNewsConsts.DbTablePrefix + "Notifications", HalcNewsConsts.DbSchema);
+            b.ConfigureByConvention();
             b.Property(x => x.DateFound).IsRequired();
             b.Property(x => x.isRead).IsRequired();
         });
