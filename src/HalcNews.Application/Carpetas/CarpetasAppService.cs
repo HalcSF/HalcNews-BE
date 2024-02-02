@@ -8,11 +8,47 @@ using Volo.Abp.Domain.Repositories;
 
 namespace HalcNews.Carpetas
 {
-    public class FolderAppService : CrudAppService<Folder, FolderDto, int>, IFolderAppService
+    public class FolderAppService : HalcNewsAppService, IFolderAppService
     {
+        private readonly IRepository<Folder, int> _repository;
         public FolderAppService(IRepository<Folder, int> repository)
-            : base(repository)
         {
+            _repository = repository;
         }
+
+        public async Task<ICollection<FolderDto>> GetFolderAsync()
+        {
+            var folder = await _repository.GetListAsync(includeDetails: true);
+
+            return ObjectMapper.Map<ICollection<Folder>, ICollection<FolderDto>>(folder);
+        }
+
+        public async Task<FolderDto> GetFolderAsync(int id)
+        {
+            var folder = await _repository.GetAsync(id);
+
+            return ObjectMapper.Map<Folder, FolderDto>(folder);
+        }
+
+        public async Task InsertFolderAsync(FolderDto folder)
+        {
+            var folderMapped = ObjectMapper.Map<FolderDto, Folder>(folder);
+
+            await _repository.InsertAsync(folderMapped);
+        }
+
+        public async Task UpdateFolderAsync(FolderDto folder)
+        {
+            var folderMapped = ObjectMapper.Map<FolderDto, Folder>(folder);
+
+            await _repository.UpdateAsync(folderMapped);
+        }
+
+        public async Task RemoveFolderAsync(FolderDto folder)
+        {
+            var folderMapped = ObjectMapper.Map<FolderDto, Folder>(folder);
+            await _repository.DeleteAsync(folderMapped);
+        }
+
     }
 }

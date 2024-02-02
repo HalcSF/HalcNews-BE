@@ -19,36 +19,36 @@ namespace HalcNews.Alertas
 
         public async Task<ICollection<AlertDto>> GetAlertAsync()
         {
-            var newsList = await _repository.GetListAsync(includeDetails: true);
+            var alert = await _repository.GetListAsync(includeDetails: true);
 
-            return ObjectMapper.Map<ICollection<Alert>, ICollection<AlertDto>>(newsList);
+            return ObjectMapper.Map<ICollection<Alert>, ICollection<AlertDto>>(alert);
         }
 
         public async Task<AlertDto> GetAlertAsync(int id)
         {
-            var NewsList = await _repository.GetAsync(id);
+            var alert = await _repository.GetAsync(id);
 
-            return ObjectMapper.Map<Alert, AlertDto>(NewsList);
+            return ObjectMapper.Map<Alert, AlertDto>(alert);
         }
 
-        public async Task InsertAlertAsync(AlertDto newsList)
+        public async Task InsertAlertAsync(AlertDto alert)
         {
-            var newsListMapped = ObjectMapper.Map<AlertDto, Alert>(newsList);
+            var alertMapped = ObjectMapper.Map<AlertDto, Alert>(alert);
 
-            await _repository.InsertAsync(newsListMapped);
+            await _repository.InsertAsync(alertMapped);
         }
 
-        public async Task UpdateAlertAsync(AlertDto newsList)
+        public async Task UpdateAlertAsync(AlertDto alert)
         {
-            var newsListMapped = ObjectMapper.Map<AlertDto, Alert>(newsList);
+            var alertMapped = ObjectMapper.Map<AlertDto, Alert>(alert);
 
-            await _repository.UpdateAsync(newsListMapped);
+            await _repository.UpdateAsync(alertMapped);
         }
 
-        public async Task RemoveAlertAsync(AlertDto newsList)
+        public async Task RemoveAlertAsync(AlertDto alert)
         {
-            var newsListMapped = ObjectMapper.Map<AlertDto, Alert>(newsList);
-            await _repository.DeleteAsync(newsListMapped);
+            var alertMapped = ObjectMapper.Map<AlertDto, Alert>(alert);
+            await _repository.DeleteAsync(alertMapped);
         }
     }
 }
