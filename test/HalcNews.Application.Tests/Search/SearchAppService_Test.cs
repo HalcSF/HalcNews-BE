@@ -7,6 +7,7 @@ using HalcNews.Busqueda;
 using HalcNews.ListaNoticias;
 using HalcNews.News;
 using HalcNews.NewsList;
+using HalcNews.Alertas;
 using Shouldly;
 using Xunit;
 
@@ -18,12 +19,14 @@ namespace HalcNews.Search
         private readonly ISearchAppService _SearchAppService;
         private readonly INewsListAppService _NewsListAppService;
         private readonly INewAppService _NewAppService;
+        private readonly IAlertAppService _AlertAppService;
 
         public SearchAppService_Test()
         {
             _SearchAppService = GetRequiredService<ISearchAppService>();
             _NewsListAppService = GetRequiredService<INewsListAppService>();
             _NewAppService = GetRequiredService<INewAppService>();
+            _AlertAppService = GetRequiredService<IAlertAppService>();
         }
 
         [Fact]
@@ -62,5 +65,22 @@ namespace HalcNews.Search
             firstNewsList.News.Count.ShouldBeGreaterThan(0);
 
         }
+
+        [Fact]
+        public async Task Should_Add_Alert()
+        {
+            //Arrage
+            var keyword = "Apple";
+
+            //Act
+            await _SearchAppService.AddAlert(keyword);
+            var response = await _AlertAppService.GetAlertAsync(1);
+
+            //Assert
+            response.ShouldNotBeNull();
+            response.Search.ShouldBe(keyword);
+            response.isRead.ShouldBeFalse();
+        }
+
     }
 }

@@ -10,5 +10,6 @@ namespace HalcNews.Busqueda
     {
         Task<Search> SearchNews(string keyword);
         Task SaveSearch(NewsListDto newsList, Search search);
+        Task AddAlert(string keyword);
     }
 }
