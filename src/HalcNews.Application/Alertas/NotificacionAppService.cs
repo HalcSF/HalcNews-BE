@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Abp.Domain.Repositories;
+using Volo.Abp.Domain.Repositories;
 using Volo.Abp.ObjectMapping;
+using Volo.Abp.Application.Services;
 
 namespace HalcNews.Alertas
 {
@@ -30,7 +31,7 @@ namespace HalcNews.Alertas
             return ObjectMapper.Map<Notification, NotificationDto>(notification);
         }
 
-        public async Task InserNotificationAsync(NotificationDto Notification)
+        public async Task InsertNotificationAsync(NotificationDto Notification)
         {
             var notificationMapped = ObjectMapper.Map<NotificationDto, Notification>(Notification);
 

@@ -75,7 +75,7 @@ namespace HalcNews.Search
             //Assert
             response.ShouldNotBeNull();
             response.Search.ShouldBe(keyword);
-            response.isRead.ShouldBeFalse();
+            response.isActive.ShouldBeTrue();
         }
 
     }

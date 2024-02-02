@@ -8,10 +8,10 @@ namespace HalcNews.Alertas
 {
     public interface INotificationAppService : IApplicationService
     {
-        Task<ICollection<AlertDto>> GetNotificacionAsync();
-        Task<AlertDto> GetNotificacionAsync(int id);
-        Task InsertNotificacionAsync(NotificationDto Notificacion);
-        Task UpdateNotificacionAsync(NotificationDto Notificacion);
-        Task RemoveNotificacionAsync(NotificationDto Notificacion);
+        Task<ICollection<NotificationDto>> GetNotificationAsync();
+        Task<NotificationDto> GetNotificationAsync(int id);
+        Task InsertNotificationAsync(NotificationDto Notificacion);
+        Task UpdateNotificationAsync(NotificationDto Notificacion);
+        Task RemoveNotificationAsync(NotificationDto Notificacion);
     }
 }
