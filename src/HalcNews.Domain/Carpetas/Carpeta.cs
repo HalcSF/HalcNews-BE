@@ -15,10 +15,10 @@ namespace HalcNews.Carpetas
         public string Name { get; set; }
         public string Description { get; set; }
         // * .. * News
-        public ICollection<New> News { get; set; }
+        public ICollection<New>? News { get; set; }
         // *..* NewsList
-        public ICollection<NewsListE> NewsLists { get; set; }
+        public ICollection<NewsListE>? NewsLists { get; set; }
         // 0..1 .. * Alert
-        public ICollection<Alert> Alerts { get; set; }
+        public ICollection<Alert>? Alerts { get; set; }
     }
 }

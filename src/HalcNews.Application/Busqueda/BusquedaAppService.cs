@@ -2,6 +2,7 @@
 using HalcNews.ListaNoticias;
 using HalcNews.Noticias;
 using HalcNews.News;
+using HalcNews.Carpetas;
 using HalcNews.Alertas;
 using HalcNews.NewsList;
 using System;
@@ -55,19 +56,23 @@ namespace HalcNews.Busqueda
             await _INewsListAppService.UpdateNewsListAync(newsList);
         }
 
-        public async Task AddAlert(string keyword)
+        public async Task AddAlert(FolderDto? folder ,string keyword)
         {
-            var newAlert = new AlertDto
+            var folderMapped = ObjectMapper.Map<FolderDto, Folder>(folder);
+
+            var newAlert = new Alert
             {
                 Search = keyword,
-                DateFound = DateTime.Now,
+                CreationDate = DateTime.Now,
                 isActive = true,
+                Folder = folderMapped,
+                Notifications = new List<Notification>(),
             };
 
-            //var newAlertMapped = ObjectMapper.Map<AlertDto, Alert>(newAlert);
+            var newAlertMapped = ObjectMapper.Map<Alert, AlertDto>(newAlert);
 
             // Inserta la nueva alerta en el repositorio
-            await _IAlertAppService.InsertAlertAsync(newAlert);
+            await _IAlertAppService.InsertAlertAsync(newAlertMapped);
 
         }
 

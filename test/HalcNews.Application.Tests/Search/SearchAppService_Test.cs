@@ -8,8 +8,10 @@ using HalcNews.ListaNoticias;
 using HalcNews.News;
 using HalcNews.NewsList;
 using HalcNews.Alertas;
+using HalcNews.Carpetas;
 using Shouldly;
 using Xunit;
+using AutoMapper.Internal.Mappers;
 
 namespace HalcNews.Search
 {
@@ -20,6 +22,7 @@ namespace HalcNews.Search
         private readonly INewsListAppService _NewsListAppService;
         private readonly INewAppService _NewAppService;
         private readonly IAlertAppService _AlertAppService;
+        private readonly IFolderAppService _FolderAppService;
 
         public SearchAppService_Test()
         {
@@ -27,6 +30,7 @@ namespace HalcNews.Search
             _NewsListAppService = GetRequiredService<INewsListAppService>();
             _NewAppService = GetRequiredService<INewAppService>();
             _AlertAppService = GetRequiredService<IAlertAppService>();
+            _FolderAppService = GetRequiredService<IFolderAppService>();
         }
 
         [Fact]
@@ -69,13 +73,16 @@ namespace HalcNews.Search
             var keyword = "Apple";
 
             //Act
-            await _SearchAppService.AddAlert(keyword);
+            var folder = await _FolderAppService.GetFolderAsync(1);
+            await _SearchAppService.AddAlert(folder, keyword);
             var response = await _AlertAppService.GetAlertAsync(1);
 
             //Assert
             response.ShouldNotBeNull();
             response.Search.ShouldBe(keyword);
             response.isActive.ShouldBeTrue();
+            response.Folder.Name.ShouldBe("CarpetaAlerta");
+            response.Folder.Alerts.ShouldBeEmpty();
         }
 
     }

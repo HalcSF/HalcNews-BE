@@ -9,7 +9,7 @@ namespace HalcNews.Alertas
     public class AlertDto : EntityDto<int>
     {
         public string Search { get; set; }
-        public DateTime DateFound { get; set; }
+        public DateTime CreationDate { get; set; }
         public bool isActive { get; set; }
 
         public FolderDto? Folder { get; set; }
