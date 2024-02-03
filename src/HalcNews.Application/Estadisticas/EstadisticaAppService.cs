@@ -142,5 +142,19 @@ namespace HalcNews.Estadisticas
 
             return wordFrequency.Take(n).ToList();
         }
+
+        //DÍA QUE MÁS BÚSQUEDAS SE REALIZARON
+
+        public async Task<DateTime> GetDayWithMostSearches()
+        {
+            var stats = await GetStatsAsync();
+
+            var daySearchCounts = stats.GroupBy(s => s.Date.Date)
+                              .Select(g => new { Date = g.Key, SearchCount = g.Count() })
+                              .OrderByDescending(g => g.SearchCount)
+                              .FirstOrDefault();
+
+            return daySearchCounts?.Date ?? DateTime.MinValue;
+        }
     }
 }

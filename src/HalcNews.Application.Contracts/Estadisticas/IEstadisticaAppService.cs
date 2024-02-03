@@ -14,5 +14,6 @@ namespace HalcNews.Estadisticas
         Task<int> AverageNumArticles();
         Task<int> AverageNumArticlesWithImages();
         Task<List<WordFrequency>> MostSearchedWords(int n);
+        Task<DateTime> GetDayWithMostSearches()
     }
 }

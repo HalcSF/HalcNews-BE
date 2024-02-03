@@ -138,7 +138,7 @@ namespace HalcNews.Estadisticas
                 Frequency = 3
             };
 
-            List<WordFrequency> wordFrequencyList =
+            List<WordFrequency> expectedWordFrequencyList =
             [
                 firstWordFrequency,
                 secondWordFrequency,
@@ -150,9 +150,58 @@ namespace HalcNews.Estadisticas
                                                                                                             //al pasar 20 como parámetro
                                                                                                             //debería devolver solo 18
 
-
-            Assert.Equal(threeMostSearchedWords, wordFrequencyList);
+            threeMostSearchedWords.ShouldBe(expectedWordFrequencyList);
+            eighteenMostSearchedWords.Count.ShouldBe(18);
         }
+
+        public async Task Should_Get_Day_With_Most_Searches()
+        {
+            var stat1 = new StatsDto
+            {
+                Date = new DateTime(2024, 3, 2),
+                ResponseTime = 0,
+                TotalArticles = 0,
+                ArticlesWithImages = 0,
+                Search = ""
+            };
+
+            var stat2 = new StatsDto
+            {
+                Date = new DateTime(2024, 1, 5),
+                ResponseTime = 0,
+                TotalArticles = 0,
+                ArticlesWithImages = 0,
+                Search = ""
+            };
+
+            var stat3 = new StatsDto
+            {
+                Date = new DateTime(2024, 3, 2),
+                ResponseTime = 0,
+                TotalArticles = 0,
+                ArticlesWithImages = 0,
+                Search = ""
+            };
+
+            var stat4 = new StatsDto
+            {
+                Date = new DateTime(2023, 7, 4),
+                ResponseTime = 0,
+                TotalArticles = 0,
+                ArticlesWithImages = 0,
+                Search = ""
+            };
+
+            await _statsAppService.InsertStatsAsync(stat1);
+            await _statsAppService.InsertStatsAsync(stat2);
+            await _statsAppService.InsertStatsAsync(stat3);
+            await _statsAppService.InsertStatsAsync(stat4);
+
+            var dayWithMostSearches = await _statsAppService.GetDayWithMostSearches();
+
+            dayWithMostSearches.ShouldBe(new DateTime(2024, 3, 2));
+        }
+
         public async Task Should_Throw_Exception()
         {
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
