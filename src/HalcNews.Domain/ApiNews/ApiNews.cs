@@ -50,7 +50,7 @@ namespace HalcNews.ApiNews
                     Title = t.Title,
                     Description = t.Description,
                     Url = t.Url,
-                    PublishedAt = t.PublishedAt,
+                    PublishedAt = (DateTime)t.PublishedAt,
                     UrlToImage = t.UrlToImage,
                     Content = t.Content
                 }));

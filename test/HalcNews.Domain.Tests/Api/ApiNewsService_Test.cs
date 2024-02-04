@@ -1,4 +1,5 @@
 ﻿using HalcNews.ApiNews;
+using HalcNews.Estadisticas;
 using Shouldly;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,11 @@ namespace HalcNews.Api
     public class ApiNewsService_Test
     {
         private readonly ApiNewsService _apiNewsService;
-        
+        IStatsAppService statsAppService;
+
         public ApiNewsService_Test()
         {
-            _apiNewsService = new ApiNewsService();
+            _apiNewsService = new ApiNewsService(statsAppService);
         }
         [Fact]
         public async Task Should_Get_All_News()

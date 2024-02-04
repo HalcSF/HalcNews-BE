@@ -112,10 +112,10 @@ namespace HalcNews.Estadisticas
             await _apiAppService.Search("Apple 2024");
             await _apiAppService.Search("Apple USA");
             await _apiAppService.Search("Is the orange orange?");
-            await _apiAppService.Search("Is the apple     angry?");
+            await _apiAppService.Search("Is the apple angry?");
             await _apiAppService.Search("Sweet apple");
             await _apiAppService.Search("Happy apple");
-            await _apiAppService.Search("Monky eating a banana      ");
+            await _apiAppService.Search("Monky eating a banana");
             await _apiAppService.Search("Cherry tomatoe");
             await _apiAppService.Search("Green tomatoe");
             await _apiAppService.Search("Tomatoe recipies");

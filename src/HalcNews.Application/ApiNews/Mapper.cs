@@ -22,7 +22,7 @@ namespace HalcNews.ApiNews
                     Title = article.Title,
                     Description = article.Description,
                     Content = article.Content,
-                    Date = ParsePublishedAt(article.PublishedAt),
+                    Date = article.PublishedAt,
                     Url = article.Url,
                     UrlImage = article.UrlToImage
                 };
