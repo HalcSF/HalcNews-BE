@@ -37,6 +37,7 @@ namespace HalcNews.Estadisticas
             stats.Count.ShouldBe(4);
         }
 
+        [Fact]
         public async Task Should_Insert_Stats()
         {
             var newStat = new StatsDto
@@ -56,6 +57,7 @@ namespace HalcNews.Estadisticas
             stats.Count.ShouldBe(1);
         }
 
+        [Fact]
         public async Task Should_Get_Average_Response_Time()
         {
             await _apiAppService.Search("Apple");
@@ -73,6 +75,7 @@ namespace HalcNews.Estadisticas
             avResponseTime.ShouldBe(manualAvResponseTime);
         }
 
+        [Fact]
         public async Task Should_Get_Average_Num_Articles()
         {
             await _apiAppService.Search("Apple");
@@ -90,6 +93,7 @@ namespace HalcNews.Estadisticas
             avNumArticles.ShouldBe(manualAvNumArticles);
         }
 
+        [Fact]
         public async Task Should_Get_Average_Num_Articles_With_Images()
         {
             await _apiAppService.Search("Apple");
@@ -107,6 +111,7 @@ namespace HalcNews.Estadisticas
             avNumArticles.ShouldBe(manualAvNumArticlesWithImages);
         }
 
+        [Fact]
         public async Task Should_Get_Most_Searched_Words()
         {
             await _apiAppService.Search("Apple 2024");
@@ -154,6 +159,7 @@ namespace HalcNews.Estadisticas
             eighteenMostSearchedWords.Count.ShouldBe(18);
         }
 
+        [Fact]
         public async Task Should_Get_Day_With_Most_Searches()
         {
             var stat1 = new StatsDto
@@ -202,6 +208,7 @@ namespace HalcNews.Estadisticas
             dayWithMostSearches.ShouldBe(new DateTime(2024, 3, 2));
         }
 
+        [Fact]
         public async Task Should_Throw_Exception()
         {
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
@@ -211,7 +218,7 @@ namespace HalcNews.Estadisticas
                 await _statsAppService.AverageNumArticlesWithImages();
             });
         }
-
+        [Fact]
         public async Task Should_Not_Get_Most_Searched_Words()
         {
             List<WordFrequency> wordFrequencyList = await _statsAppService.MostSearchedWords(34);
