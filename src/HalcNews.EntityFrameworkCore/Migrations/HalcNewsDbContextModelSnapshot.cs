@@ -36,7 +36,7 @@ namespace HalcNews.Migrations
 
                     b.HasIndex("NewsId");
 
-                    b.ToTable("FolderNew", (string)null);
+                    b.ToTable("FolderNew");
                 });
 
             modelBuilder.Entity("FolderNewsListE", b =>
@@ -51,7 +51,7 @@ namespace HalcNews.Migrations
 
                     b.HasIndex("NewsListsId");
 
-                    b.ToTable("FolderNewsListE", (string)null);
+                    b.ToTable("FolderNewsListE");
                 });
 
             modelBuilder.Entity("HalcNews.Alertas.Alert", b =>
@@ -62,10 +62,10 @@ namespace HalcNews.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("DateFound")
+                    b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("FolderId")
+                    b.Property<int?>("FolderId")
                         .HasColumnType("int");
 
                     b.Property<string>("Search")
@@ -73,7 +73,7 @@ namespace HalcNews.Migrations
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
-                    b.Property<bool>("isRead")
+                    b.Property<bool>("isActive")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
@@ -81,6 +81,35 @@ namespace HalcNews.Migrations
                     b.HasIndex("FolderId");
 
                     b.ToTable("AppAlerts", (string)null);
+                });
+
+            modelBuilder.Entity("HalcNews.Alertas.Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AlertId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateFound")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("NewId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isRead")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlertId");
+
+                    b.HasIndex("NewId");
+
+                    b.ToTable("AppNotifications", (string)null);
                 });
 
             modelBuilder.Entity("HalcNews.Carpetas.Folder", b =>
@@ -104,6 +133,35 @@ namespace HalcNews.Migrations
                     b.ToTable("AppFolders", (string)null);
                 });
 
+            modelBuilder.Entity("HalcNews.Estadisticas.Stats", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ArticlesWithImages")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("ResponseTime")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Search")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TotalArticles")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppStatistics", (string)null);
+                });
+
             modelBuilder.Entity("HalcNews.Fuentes.Source", b =>
                 {
                     b.Property<int>("Id")
@@ -118,7 +176,7 @@ namespace HalcNews.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppSources", (string)null);
+                    b.ToTable("Source");
                 });
 
             modelBuilder.Entity("HalcNews.Lecturas.Lectury", b =>
@@ -192,7 +250,7 @@ namespace HalcNews.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SourceId")
+                    b.Property<int?>("SourceId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -247,7 +305,7 @@ namespace HalcNews.Migrations
 
                     b.HasIndex("NewsListsId");
 
-                    b.ToTable("NewNewsListE", (string)null);
+                    b.ToTable("NewNewsListE");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>
@@ -1940,11 +1998,28 @@ namespace HalcNews.Migrations
                 {
                     b.HasOne("HalcNews.Carpetas.Folder", "Folder")
                         .WithMany("Alerts")
-                        .HasForeignKey("FolderId")
+                        .HasForeignKey("FolderId");
+
+                    b.Navigation("Folder");
+                });
+
+            modelBuilder.Entity("HalcNews.Alertas.Notification", b =>
+                {
+                    b.HasOne("HalcNews.Alertas.Alert", "Alert")
+                        .WithMany("Notifications")
+                        .HasForeignKey("AlertId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Folder");
+                    b.HasOne("HalcNews.Noticias.New", "New")
+                        .WithMany()
+                        .HasForeignKey("NewId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Alert");
+
+                    b.Navigation("New");
                 });
 
             modelBuilder.Entity("HalcNews.Lecturas.Lectury", b =>
@@ -1962,9 +2037,7 @@ namespace HalcNews.Migrations
                 {
                     b.HasOne("HalcNews.Fuentes.Source", "Source")
                         .WithMany("News")
-                        .HasForeignKey("SourceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SourceId");
 
                     b.Navigation("Source");
                 });
@@ -2124,6 +2197,11 @@ namespace HalcNews.Migrations
                         .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HalcNews.Alertas.Alert", b =>
+                {
+                    b.Navigation("Notifications");
                 });
 
             modelBuilder.Entity("HalcNews.Carpetas.Folder", b =>

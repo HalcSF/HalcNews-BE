@@ -1,4 +1,5 @@
-﻿using HalcNews.Noticias;
+﻿using HalcNews.Estadisticas;
+using HalcNews.Noticias;
 using Shouldly;
 using System;
 using System.Collections.Generic;

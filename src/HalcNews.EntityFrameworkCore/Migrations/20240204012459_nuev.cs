@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HalcNews.Migrations
 {
     /// <inheritdoc />
-    public partial class NuevasTablas : Migration
+    public partial class nuev : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -375,7 +375,9 @@ namespace HalcNews.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -398,16 +400,20 @@ namespace HalcNews.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AppSources",
+                name: "AppStatistics",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ResponseTime = table.Column<double>(type: "float", nullable: false),
+                    TotalArticles = table.Column<int>(type: "int", nullable: false),
+                    ArticlesWithImages = table.Column<int>(type: "int", nullable: false),
+                    Search = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppSources", x => x.Id);
+                    table.PrimaryKey("PK_AppStatistics", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -481,6 +487,19 @@ namespace HalcNews.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OpenIddictScopes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Source",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Source", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -722,9 +741,9 @@ namespace HalcNews.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Search = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    DateFound = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    isRead = table.Column<bool>(type: "bit", nullable: false),
-                    FolderId = table.Column<int>(type: "int", nullable: false)
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    isActive = table.Column<bool>(type: "bit", nullable: false),
+                    FolderId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -733,8 +752,7 @@ namespace HalcNews.Migrations
                         name: "FK_AppAlerts_AppFolders_FolderId",
                         column: x => x.FolderId,
                         principalTable: "AppFolders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -757,32 +775,6 @@ namespace HalcNews.Migrations
                         name: "FK_FolderNewsListE_AppNewsList_NewsListsId",
                         column: x => x.NewsListsId,
                         principalTable: "AppNewsList",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AppNews",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Author = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Url = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    UrlImage = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    SourceId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppNews", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AppNews_AppSources_SourceId",
-                        column: x => x.SourceId,
-                        principalTable: "AppSources",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -820,6 +812,31 @@ namespace HalcNews.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AppNews",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Author = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Url = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    UrlImage = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    SourceId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppNews", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppNews_Source_SourceId",
+                        column: x => x.SourceId,
+                        principalTable: "Source",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AbpEntityPropertyChanges",
                 columns: table => new
                 {
@@ -843,6 +860,47 @@ namespace HalcNews.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "OpenIddictTokens",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ApplicationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    AuthorizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Payload = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Properties = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RedemptionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ReferenceId = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Subject = table.Column<string>(type: "nvarchar(400)", maxLength: 400, nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OpenIddictTokens", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OpenIddictTokens_OpenIddictApplications_ApplicationId",
+                        column: x => x.ApplicationId,
+                        principalTable: "OpenIddictApplications",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_OpenIddictTokens_OpenIddictAuthorizations_AuthorizationId",
+                        column: x => x.AuthorizationId,
+                        principalTable: "OpenIddictAuthorizations",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AppLecturies",
                 columns: table => new
                 {
@@ -856,6 +914,34 @@ namespace HalcNews.Migrations
                     table.PrimaryKey("PK_AppLecturies", x => x.Id);
                     table.ForeignKey(
                         name: "FK_AppLecturies_AppNews_NewId",
+                        column: x => x.NewId,
+                        principalTable: "AppNews",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppNotifications",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DateFound = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    isRead = table.Column<bool>(type: "bit", nullable: false),
+                    AlertId = table.Column<int>(type: "int", nullable: false),
+                    NewId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppNotifications", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppNotifications_AppAlerts_AlertId",
+                        column: x => x.AlertId,
+                        principalTable: "AppAlerts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AppNotifications_AppNews_NewId",
                         column: x => x.NewId,
                         principalTable: "AppNews",
                         principalColumn: "Id",
@@ -908,47 +994,6 @@ namespace HalcNews.Migrations
                         principalTable: "AppNews",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "OpenIddictTokens",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ApplicationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    AuthorizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Payload = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Properties = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RedemptionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ReferenceId = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Subject = table.Column<string>(type: "nvarchar(400)", maxLength: 400, nullable: true),
-                    Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    DeleterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OpenIddictTokens", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_OpenIddictTokens_OpenIddictApplications_ApplicationId",
-                        column: x => x.ApplicationId,
-                        principalTable: "OpenIddictApplications",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_OpenIddictTokens_OpenIddictAuthorizations_AuthorizationId",
-                        column: x => x.AuthorizationId,
-                        principalTable: "OpenIddictAuthorizations",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -1159,6 +1204,16 @@ namespace HalcNews.Migrations
                 column: "SourceId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AppNotifications_AlertId",
+                table: "AppNotifications",
+                column: "AlertId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppNotifications_NewId",
+                table: "AppNotifications",
+                column: "NewId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_FolderNew_NewsId",
                 table: "FolderNew",
                 column: "NewsId");
@@ -1274,10 +1329,13 @@ namespace HalcNews.Migrations
                 name: "AbpUserTokens");
 
             migrationBuilder.DropTable(
-                name: "AppAlerts");
+                name: "AppLecturies");
 
             migrationBuilder.DropTable(
-                name: "AppLecturies");
+                name: "AppNotifications");
+
+            migrationBuilder.DropTable(
+                name: "AppStatistics");
 
             migrationBuilder.DropTable(
                 name: "AppThemes");
@@ -1313,7 +1371,7 @@ namespace HalcNews.Migrations
                 name: "AbpUsers");
 
             migrationBuilder.DropTable(
-                name: "AppFolders");
+                name: "AppAlerts");
 
             migrationBuilder.DropTable(
                 name: "AppNewsList");
@@ -1328,7 +1386,10 @@ namespace HalcNews.Migrations
                 name: "AbpAuditLogs");
 
             migrationBuilder.DropTable(
-                name: "AppSources");
+                name: "AppFolders");
+
+            migrationBuilder.DropTable(
+                name: "Source");
 
             migrationBuilder.DropTable(
                 name: "OpenIddictApplications");

@@ -22,6 +22,8 @@ using HalcNews.Lecturas;
 using HalcNews.Alertas;
 using HalcNews.Carpetas;
 using Microsoft.Identity.Client;
+using HalcNews.Estadisticas;
+using System;
 
 namespace HalcNews.EntityFrameworkCore;
 
@@ -72,6 +74,9 @@ public class HalcNewsDbContext :
     public DbSet<Alert> Alerts { get; set; }
     public DbSet<Lectury> Lecturies { get; set; }
     public DbSet<Notification> Notifications { get; set; }
+
+    public DbSet<Stats> Statistics { get; set; }
+
     //public DbSet<Source> Sources { get; set; }
 
 
@@ -203,5 +208,16 @@ public class HalcNewsDbContext :
             b.HasMany(x => x.Alerts)
                 .WithOne(x => x.Folder);
         });
+
+        builder.Entity<Stats>(b =>
+        {
+            b.ToTable(HalcNewsConsts.DbTablePrefix + "Statistics", HalcNewsConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.Date).IsRequired();
+        b.Property(x => x.ResponseTime).IsRequired();
+        b.Property(x => x.TotalArticles).IsRequired();
+        b.Property(x => x.ArticlesWithImages).IsRequired();
+        b.Property(x => x.Search);
+});
     }
 }

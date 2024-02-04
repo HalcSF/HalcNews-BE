@@ -16,12 +16,12 @@ namespace HalcNews.ApiNews
     public class ApiNewsService : IApiNews
     {
         NewsApiClient newsApiClient;
-        private readonly IStatsAppService _statsAppService;
+        private readonly IStatsAppService _IStatsAppService;
 
         public ApiNewsService(IStatsAppService statsAppService)
         {
             newsApiClient = new NewsApiClient("1967620b6fd64daf89307eec6ece4a14");
-            _statsAppService = statsAppService;
+            _IStatsAppService = statsAppService;
         }
 
         public async Task<ICollection<ArticleDto>> GetNewsAsync(string? Search)
@@ -64,7 +64,7 @@ namespace HalcNews.ApiNews
                     Search = Search //Si no hay parámetro de búsqueda, se asigna null
                 };
 
-                await  _statsAppService.InsertStatsAsync(stats);
+                await _IStatsAppService.InsertStatsAsync(stats);
 
                 return responseList;
             }
