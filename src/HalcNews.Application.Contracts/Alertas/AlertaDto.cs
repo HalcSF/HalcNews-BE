@@ -12,9 +12,9 @@ namespace HalcNews.Alertas
         public DateTime CreationDate { get; set; }
         public bool isActive { get; set; }
 
-        public FolderDto Folder { get; set; }
+        public int FolderId { get; set; }
 
-        public ICollection<NotificationDto> Notifications { get; set; }
+        public ICollection<NotificationDto>? Notifications { get; set; }
 
     }
 }

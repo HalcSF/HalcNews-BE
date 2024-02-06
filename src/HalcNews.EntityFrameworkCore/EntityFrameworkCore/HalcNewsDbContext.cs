@@ -207,8 +207,7 @@ public class HalcNewsDbContext :
             b.Property(x => x.Name).IsRequired().HasMaxLength(128);
             b.Property(x => x.Description).IsRequired();
             // Relación 0.1 .. * Alert
-            b.HasMany(x => x.Alerts)
-                .WithOne(x => x.Folder);
+            b.HasMany(x => x.Alerts);
         });
 
         builder.Entity<Stats>(b =>

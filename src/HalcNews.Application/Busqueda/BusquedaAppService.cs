@@ -56,16 +56,15 @@ namespace HalcNews.Busqueda
             await _INewsListAppService.UpdateNewsListAync(newsList);
         }
 
-        public async Task AddAlert(FolderDto? folder ,string keyword)
+        public async Task AddAlert(int folderId, string keyword)
         {
-            var folderMapped = ObjectMapper.Map<FolderDto, Folder>(folder);
 
             var newAlert = new Alert
             {
                 Search = keyword,
                 CreationDate = DateTime.Now,
                 isActive = true,
-                Folder = folderMapped,
+                FolderId = folderId,
                 Notifications = new List<Notification>(),
             };
 
