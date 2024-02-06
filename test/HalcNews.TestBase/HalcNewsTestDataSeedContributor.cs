@@ -39,9 +39,9 @@ public class HalcNewsTestDataSeedContributor : IDataSeedContributor, ITransientD
         {
             Name = "CarpetaAlerta",
             Description = "Es la Carpeta de Alerta",
-            News = new List<New>(),
-            NewsLists = new List<NewsListE>(),
-            Alerts = new List<Alert>(),
+            //News = new List<New>(),
+            //NewsLists = new List<NewsListE>(),
+            //Alerts = new List<Alert>(),
         });
 
     }

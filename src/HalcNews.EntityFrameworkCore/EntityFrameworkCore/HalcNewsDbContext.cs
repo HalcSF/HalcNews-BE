@@ -74,7 +74,6 @@ public class HalcNewsDbContext :
     public DbSet<Alert> Alerts { get; set; }
     public DbSet<Lectury> Lecturies { get; set; }
     public DbSet<Notification> Notifications { get; set; }
-
     public DbSet<Stats> Statistics { get; set; }
 
     //public DbSet<Source> Sources { get; set; }
@@ -204,6 +203,9 @@ public class HalcNewsDbContext :
             b.ToTable(HalcNewsConsts.DbTablePrefix + "Folders", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
             // Relación con NewsList y New son configuradas por convencion por EF Core
+            
+            b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Description).IsRequired();
             // Relación 0.1 .. * Alert
             b.HasMany(x => x.Alerts)
                 .WithOne(x => x.Folder);

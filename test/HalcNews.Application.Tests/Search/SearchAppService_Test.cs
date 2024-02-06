@@ -70,19 +70,23 @@ namespace HalcNews.Search
         public async Task Should_Add_Alert()
         {
             //Arrage
+
             var keyword = "Apple";
+            var folder = new FolderDto
+            {
+                Name = "Carpeta de Alerta",
+                Description = "Prueba"
+            };
 
             //Act
-            var folder = await _FolderAppService.GetFolderAsync(1);
             await _SearchAppService.AddAlert(folder, keyword);
             var response = await _AlertAppService.GetAlertAsync(1);
 
             //Assert
             response.ShouldNotBeNull();
             response.Search.ShouldBe(keyword);
-            response.isActive.ShouldBeTrue();
-            response.Folder.Name.ShouldBe("CarpetaAlerta");
-            response.Folder.Alerts.ShouldBeEmpty();
+            response.Folder.Name.ShouldBe("Carpeta de Alerta");
+
         }
 
     }

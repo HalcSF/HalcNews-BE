@@ -25,8 +25,7 @@ namespace HalcNews.Carpetas
 
         public async Task<FolderDto> GetFolderAsync(int id)
         {
-            var folder = await _repository.GetAsync(id);
-
+            var folder = await _repository.GetAsync(id, includeDetails:true);
             return ObjectMapper.Map<Folder, FolderDto>(folder);
         }
 
