@@ -114,18 +114,17 @@ namespace HalcNews.Estadisticas
         [Fact]
         public async Task Should_Get_Most_Searched_Words()
         {
-            await _apiAppService.Search("Apple 2024");
-            await _apiAppService.Search("Apple USA");
-            await _apiAppService.Search("Is the orange orange?");
-            await _apiAppService.Search("Is the apple angry?");
-            await _apiAppService.Search("Sweet apple");
-            await _apiAppService.Search("Happy apple");
-            await _apiAppService.Search("Monky eating a banana");
-            await _apiAppService.Search("Cherry tomatoe");
-            await _apiAppService.Search("Green tomatoe");
-            await _apiAppService.Search("Tomatoe recipies");
-            await _apiAppService.Search("Tomatoe");
-            await _apiAppService.Search("Orange");
+
+            List<string> searchs = [
+                "Apple 2024", "Apple USA", "Is the orange orange?", "Is the apple angry?",
+                "Sweet apple", "Happy apple", "Monky eating a banana", "Cherry tomatoe", "Green tomatoe",
+                "Tomatoe recipies", "Tomatoe", "Orange"
+            ];
+
+            foreach (var search in searchs)
+            {
+                await _apiAppService.Search(search);
+            }
 
             var firstWordFrequency = new WordFrequency
             {
@@ -151,12 +150,19 @@ namespace HalcNews.Estadisticas
             ];
 
             List<WordFrequency> threeMostSearchedWords = await _statsAppService.MostSearchedWords(3);
-            List<WordFrequency> eighteenMostSearchedWords = await _statsAppService.MostSearchedWords(20);   //Existen 18 únicas palabras,
-                                                                                                            //al pasar 20 como parámetro
-                                                                                                            //debería devolver solo 18
+            List<WordFrequency> seventeenMostSearchedWords = await _statsAppService.MostSearchedWords(20);//Existen 17 únicas palabras,
+                                                                                                        //al pasar 20 como parámetro
+                                                                                                        //debería devolver solo 17
 
-            threeMostSearchedWords.ShouldBe(expectedWordFrequencyList);
-            eighteenMostSearchedWords.Count.ShouldBe(18);
+            var expectedWords = expectedWordFrequencyList.Select(word => word.Word).ToList();
+            var realWords = threeMostSearchedWords.Select(word => word.Word).ToList();
+            realWords.ShouldBe(expectedWords);
+
+            var expectedFrequency = expectedWordFrequencyList.Select(f => f.Frequency).ToList();
+            var realFrequency = threeMostSearchedWords.Select(f => f.Frequency).ToList();
+            realFrequency.ShouldBe(expectedFrequency);
+
+            seventeenMostSearchedWords.Count.ShouldBe(17);
         }
 
         [Fact]

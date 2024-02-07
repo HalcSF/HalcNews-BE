@@ -70,7 +70,7 @@ namespace HalcNews.ApiNews
             }
             else
             {
-                throw new ApplicationException("No se pudieron obtener noticias desde NewsAPI, error: " + articlesResponse.Status);
+                throw new ApplicationException("No se pudieron obtener noticias desde NewsAPI, error: " + articlesResponse.Error.Code);
             }
         }
     }

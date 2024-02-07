@@ -114,16 +114,17 @@ namespace HalcNews.Estadisticas
             return stats.Select(s => s.Search).ToList();
         }
 
-        public static List<string> NormalizeWords(List<string> searches)
+        public List<string> NormalizeWords(List<string> searches)
         {
+            var punctuation = new char[] { '.', ',', '?', '!', ';', ':' };
             //Separa las búsquedas en palabras individuales en minúscula
             return searches
                 .SelectMany(search => (search ?? "").Split(' ', StringSplitOptions.RemoveEmptyEntries))
-                .Select(word => word.ToLower())
+                .Select(word => word.TrimEnd(punctuation).ToLower())
                 .ToList();
         }
 
-        public static List<WordFrequency> CountWordFrequency(List<string> words)
+        public List<WordFrequency> CountWordFrequency(List<string> words)
         {
             //Asocia cada palabra con su frecuencia de búsqueda y devuelve una lista ordenada por frecuencia de forma descendiente
             return words
