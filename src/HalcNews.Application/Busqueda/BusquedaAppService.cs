@@ -22,12 +22,14 @@ namespace HalcNews.Busqueda
         private readonly INewsListAppService _INewsListAppService;
         private readonly INewAppService _INewAppService;
         private readonly IAlertAppService _IAlertAppService;
-        public SearchAppService(IApiNewsAppService apiNewsAppService, INewsListAppService newsListAppService, INewAppService newAppService, IAlertAppService alertAppService)
+        private readonly IFolderAppService _IFolderAppService;
+        public SearchAppService(IApiNewsAppService apiNewsAppService, INewsListAppService newsListAppService, INewAppService newAppService, IAlertAppService alertAppService, IFolderAppService folderAppService)
         {
             _IApiNewsAppService = apiNewsAppService;
             _INewsListAppService = newsListAppService;
             _INewAppService = newAppService;
             _IAlertAppService = alertAppService;
+            _IFolderAppService = folderAppService;
         }
 
         public async Task<Search> SearchNews(string keyword)
@@ -74,6 +76,25 @@ namespace HalcNews.Busqueda
             await _IAlertAppService.InsertAlertAsync(newAlertMapped);
 
         }
+
+        public async Task AddNewInFolder(int folderId, NewDto newE)
+        {
+
+            var folder = await _IFolderAppService.GetFolderAsync(folderId);
+            folder.News.Add(newE);
+            await _IFolderAppService.UpdateFolderAsync(folder);
+
+        }
+
+        public async Task AddNewListInFolder(int folderId, NewsListDto newList)
+        {
+
+            var folder = await _IFolderAppService.GetFolderAsync(folderId);
+            folder.NewsLists.Add(newList);
+            await _IFolderAppService.UpdateFolderAsync(folder);
+
+        }
+
 
     }
 }

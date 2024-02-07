@@ -12,6 +12,8 @@ using HalcNews.Carpetas;
 using Shouldly;
 using Xunit;
 using AutoMapper.Internal.Mappers;
+using Microsoft.EntityFrameworkCore;
+using Polly;
 
 namespace HalcNews.Search
 {
@@ -84,6 +86,33 @@ namespace HalcNews.Search
             response.isActive.ShouldBeTrue();
             response.FolderId.ShouldBe(1);
             folderId2.Name.ShouldBe("CarpetaAlerta");
+        }
+
+        [Fact]
+        public async Task Should_Add_New_In_Folder()
+        {
+            //Arrage
+            var newE = new NewDto
+            {
+                Author = "Tobias Grandi",
+                Title = "TituloEjemplo",
+                Description = "DescripcionEjemplo",
+                Content = "ContentEjemplo",
+                Date = DateTime.Now,
+                Url = "URL",
+                UrlImage = "URLimage"
+            };
+
+            //Act
+            await _SearchAppService.AddNewInFolder(1,newE);
+            var response = await _FolderAppService.GetFolderAsync(1);
+            
+
+            //Assert
+            response.ShouldNotBeNull();
+            response.Name.ShouldBe("CarpetaAlerta");
+            response.News.ShouldNotBeEmpty();
+            response.News.FirstOrDefault().Author.ShouldBe("Author");
         }
 
     }
