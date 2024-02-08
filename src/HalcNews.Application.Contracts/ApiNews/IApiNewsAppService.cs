@@ -9,5 +9,6 @@ namespace HalcNews.ApiNews
     public interface IApiNewsAppService 
     {
         Task<ICollection<NewDto>> Search(string? Search);
+        Task<ICollection<NewDto>> SearchFromDate(string? Search, DateTime date);
     }
 }

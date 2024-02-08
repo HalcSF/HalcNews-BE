@@ -24,6 +24,22 @@ namespace HalcNews.ApiNews
             return ManualMapper.MapArticlesToNews(news);
         }
 
+        public async Task<ICollection<NewDto>> SearchFromDate(string? Search, DateTime date)
+        {
+            var news = await _apiNews.GetNewsAsync(Search);
+            var newsFromDate = new List<ArticleDto>();
+
+            foreach (ArticleDto newD in news)
+            {
+                if (newD.PublishedAt > date) 
+                { 
+                    newsFromDate.Add(newD); 
+                }
+            };
+
+            return ManualMapper.MapArticlesToNews(news);
+        }
+
 
     }
 }

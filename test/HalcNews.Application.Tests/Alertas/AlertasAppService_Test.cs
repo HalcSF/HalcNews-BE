@@ -80,6 +80,7 @@ namespace HalcNews.Alertas
                 }
 
                 notifications.Count.ShouldBe(1);
+                notifications.First().New.Author.ShouldBe("Autor");
             }
         }
     }

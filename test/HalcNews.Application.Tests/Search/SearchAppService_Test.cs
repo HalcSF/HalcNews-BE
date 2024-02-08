@@ -116,5 +116,32 @@ namespace HalcNews.Search
             folder.News.FirstOrDefault().Author.ShouldBe("Tobias Grandi");
         }
 
+        [Fact]
+        public async Task Should_Search_With_Date()
+        {
+            //Arrage
+            var newE = new NewDto
+            {
+                Author = "Tobias Grandi",
+                Title = "TituloEjemplo",
+                Description = "DescripcionEjemplo",
+                Content = "ContentEjemplo",
+                Date = DateTime.Now.AddDays(1),
+                Url = "URL",
+                UrlImage = "URLimage"
+            };
+
+            await _NewAppService.InsertNewAync(newE);
+            var folder = await _FolderAppService.GetFolderAsync(1);
+            
+            //Act
+            await _SearchAppService.SearchWithDate(folder.Alerts.First().Search, folder.Alerts.First());
+
+            //Assert
+
+            folder.Alerts.First().Search.ShouldBe("BusquedaPrueba");
+            folder.Alerts.First().Notifications.Count.ShouldBe(2);
+        }
+
     }
 }

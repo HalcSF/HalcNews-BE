@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Volo.Abp.ObjectMapping;
 using NewsAPI.Constants;
 using NewsAPI.Models;
+using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace HalcNews.Busqueda
 {
@@ -85,15 +86,33 @@ namespace HalcNews.Busqueda
             await _IFolderAppService.UpdateFolderAsync(folder);
         }
 
-        public async Task AddNewListInFolder(int folderId, NewsListDto newList)
+        public async Task AddNewListInFolder(FolderDto folder, NewsListDto newList)
         {
 
-            var folder = await _IFolderAppService.GetFolderAsync(folderId);
             folder.NewsLists.Add(newList);
             await _IFolderAppService.UpdateFolderAsync(folder);
 
         }
 
+        public async Task SearchWithDate(string keyword, AlertDto alert)
+        {
+            
+            var news = await _IApiNewsAppService.SearchFromDate(keyword, alert.CreationDate);
+
+            foreach (NewDto newDto in news)
+            {
+                var newNotification = new NotificationDto
+                {
+                    DateFound = DateTime.Now,
+                    isRead = false,
+                    New = newDto,
+                };
+
+                await _IAlertAppService.AddNotification(alert, newNotification);
+
+            }
+
+        }
 
     }
 }
