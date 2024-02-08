@@ -26,7 +26,7 @@ namespace HalcNews.Alertas
 
         public async Task<AlertDto> GetAlertAsync(int id)
         {
-            var alert = await _repository.GetAsync(id);
+            var alert = await _repository.GetAsync(id, includeDetails: true);
 
             return ObjectMapper.Map<Alert, AlertDto>(alert);
         }
@@ -49,6 +49,13 @@ namespace HalcNews.Alertas
         {
             var alertMapped = ObjectMapper.Map<AlertDto, Alert>(alert);
             await _repository.DeleteAsync(alertMapped);
+        }
+
+        public async Task AddNotification(AlertDto alert, NotificationDto notification)
+        {
+            var alertMapped = ObjectMapper.Map<AlertDto, Alert>(alert);
+            alert.Notifications.Add(notification);
+            await _repository.UpdateAsync(alertMapped);
         }
     }
 }

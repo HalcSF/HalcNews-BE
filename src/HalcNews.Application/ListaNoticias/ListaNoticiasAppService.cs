@@ -1,12 +1,8 @@
 ﻿using HalcNews.ListaNoticias;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
-using Volo.Abp.ObjectMapping;
 
 namespace HalcNews.NewsList
 {
@@ -27,7 +23,7 @@ namespace HalcNews.NewsList
 
         public async Task<NewsListDto> GetNewsListAsync(int id)
         {
-            var NewsList = await _repository.GetAsync(id);
+            var NewsList = await _repository.GetAsync(id, includeDetails:true);
 
             return ObjectMapper.Map<NewsListE, NewsListDto>(NewsList);
         }

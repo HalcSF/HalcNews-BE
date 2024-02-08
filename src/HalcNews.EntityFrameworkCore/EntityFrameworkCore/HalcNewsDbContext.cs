@@ -185,6 +185,7 @@ public class HalcNewsDbContext :
             b.Property(x => x.Search).IsRequired().HasMaxLength(128);
             b.Property(x => x.CreationDate).IsRequired();
             b.Property(x => x.isActive).IsRequired();
+            b.Property(x => x.FolderId).IsRequired();
 
             b.HasMany(x => x.Notifications)
                 .WithOne(x => x.Alert);

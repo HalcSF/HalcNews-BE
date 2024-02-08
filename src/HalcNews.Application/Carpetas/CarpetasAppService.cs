@@ -33,7 +33,7 @@ namespace HalcNews.Carpetas
         {
             var folderMapped = ObjectMapper.Map<FolderDto, Folder>(folder);
 
-            await _repository.InsertAsync(folderMapped);
+            await _repository.InsertAsync(folderMapped, autoSave: true);
         }
 
         public async Task UpdateFolderAsync(FolderDto folder)

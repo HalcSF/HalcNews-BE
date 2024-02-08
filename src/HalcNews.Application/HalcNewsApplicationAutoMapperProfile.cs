@@ -23,7 +23,7 @@ public class HalcNewsApplicationAutoMapperProfile : Profile
          * into multiple profile classes for a better organization. */
         CreateMap<Theme, ThemeDto>().ReverseMap();
         CreateMap<New, NewDto>().ReverseMap();
-        CreateMap<NewsListE, NewsListDto>().ReverseMap();
+        CreateMap<NewsListE, NewsListDto>().ReverseMap().ForMember(dest => dest.News, opt => opt.MapFrom(src => src.News));
         CreateMap<Fuentes.Source, SourceDto>().ReverseMap();
         CreateMap<Lectury, LecturyDto>().ReverseMap();
         CreateMap<Alert, AlertDto>().ReverseMap();

@@ -19,10 +19,12 @@ public class HalcNewsTestDataSeedContributor : IDataSeedContributor, ITransientD
 
     private readonly IRepository<NewsListE, int> _newsListRepository;
     private readonly IRepository<Folder, int> _folderRepository;
-    public HalcNewsTestDataSeedContributor(IRepository<NewsListE, int> newsListRepository, IRepository<Folder, int> folderRepository)
+    private readonly IRepository<Alert, int> _alertRepository;
+    public HalcNewsTestDataSeedContributor(IRepository<NewsListE, int> newsListRepository, IRepository<Folder, int> folderRepository, IRepository<Alert, int> alertRepository)
     {
         _newsListRepository = newsListRepository;
         _folderRepository = folderRepository;
+        _alertRepository = alertRepository;
     }
 
     public async Task SeedAsync(DataSeedContext context)
@@ -39,10 +41,40 @@ public class HalcNewsTestDataSeedContributor : IDataSeedContributor, ITransientD
         {
             Name = "CarpetaAlerta",
             Description = "Es la Carpeta de Alerta",
-            //News = new List<New>(),
-            //NewsLists = new List<NewsListE>(),
-            //Alerts = new List<Alert>(),
+            Alerts = new List<Alert>
+        {
+            new Alert
+            {
+                Search = "BusquedaPrueba",
+                CreationDate = DateTime.Now,
+                isActive = true,
+                FolderId = 1,
+                Notifications = new List<Notification>
+                {
+                    new Notification
+                    {
+                        DateFound = DateTime.Now,
+                        isRead = false,
+                        New = new New
+                        {
+                            Author = "Autor",
+                            Title = "Título",
+                            Description = "Descripción",
+                            Content = "Contenido",
+                            Date = DateTime.Now,
+                            Url = "URL",
+                            UrlImage = "URLImage"
+                        }
+                    }
+                }
+            }
+        }
         });
+
+        
+
+        
+
 
     }
 }

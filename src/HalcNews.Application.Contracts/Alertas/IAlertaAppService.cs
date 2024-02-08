@@ -13,5 +13,6 @@ namespace HalcNews.Alertas
         Task InsertAlertAsync(AlertDto newAlert);
         Task UpdateAlertAsync(AlertDto newAlert);
         Task RemoveAlertAsync(AlertDto newAlert);
+        Task AddNotification(AlertDto alert, NotificationDto notification);
     }
 }
