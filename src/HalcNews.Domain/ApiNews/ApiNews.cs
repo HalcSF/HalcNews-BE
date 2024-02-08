@@ -20,7 +20,7 @@ namespace HalcNews.ApiNews
 
         public ApiNewsService(IStatsAppService statsAppService)
         {
-            newsApiClient = new NewsApiClient("a3be31d397de431ab9f8c58314c3f3b8");
+            newsApiClient = new NewsApiClient("8f12311b078147898672cc97936e322d");
             _IStatsAppService = statsAppService;
         }
 

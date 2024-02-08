@@ -81,7 +81,7 @@ namespace HalcNews.Search
             // Agregamos la alerta
             await _SearchAppService.AddAlert(folder, keyword);
 
-            var alerta = folder.Alerts.FirstOrDefault();
+            var alerta = folder.Alerts.Last();
 
             //Assert
             folder.ShouldNotBeNull();
