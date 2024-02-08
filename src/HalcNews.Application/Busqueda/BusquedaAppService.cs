@@ -58,32 +58,31 @@ namespace HalcNews.Busqueda
             await _INewsListAppService.UpdateNewsListAync(newsList);
         }
 
-        public async Task AddAlert(int folderId, string keyword)
+        public async Task AddAlert(FolderDto folder, string keyword)
         {
-
             var newAlert = new Alert
             {
                 Search = keyword,
                 CreationDate = DateTime.Now,
                 isActive = true,
-                FolderId = folderId,
+                FolderId = folder.Id,
                 Notifications = new List<Notification>(),
             };
 
             var newAlertMapped = ObjectMapper.Map<Alert, AlertDto>(newAlert);
+            folder.Alerts.Add(newAlertMapped);
 
             // Inserta la nueva alerta en el repositorio
             await _IAlertAppService.InsertAlertAsync(newAlertMapped);
+            // Actualizamos la carpeta 
+            await _IFolderAppService.UpdateFolderAsync(folder);
 
         }
 
-        public async Task AddNewInFolder(int folderId, NewDto newE)
+        public async Task AddNewInFolder(FolderDto folder, NewDto newE)
         {
-
-            var folder = await _IFolderAppService.GetFolderAsync(folderId);
             folder.News.Add(newE);
             await _IFolderAppService.UpdateFolderAsync(folder);
-
         }
 
         public async Task AddNewListInFolder(int folderId, NewsListDto newList)

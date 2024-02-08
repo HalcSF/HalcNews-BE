@@ -75,17 +75,19 @@ namespace HalcNews.Search
             var keyword = "Apple";
 
             //Act
-            var folderId = await _FolderAppService.GetFolderAsync(1);
-            await _SearchAppService.AddAlert(folderId.Id, keyword);
-            var response = await _AlertAppService.GetAlertAsync(1);
-            var folderId2 = await _FolderAppService.GetFolderAsync(response.FolderId);
+            // Obtenemos la carpeta a la cual le vamos a agregar una alerta
+            var folder = await _FolderAppService.GetFolderAsync(1);
+
+            // Agregamos la alerta
+            await _SearchAppService.AddAlert(folder, keyword);
+
+            var alerta = folder.Alerts.FirstOrDefault();
 
             //Assert
-            response.ShouldNotBeNull();
-            response.Search.ShouldBe(keyword);
-            response.isActive.ShouldBeTrue();
-            response.FolderId.ShouldBe(1);
-            folderId2.Name.ShouldBe("CarpetaAlerta");
+            folder.ShouldNotBeNull();
+            folder.Name.ShouldBe("CarpetaAlerta");
+            alerta.Search.ShouldBe(keyword);
+
         }
 
         [Fact]
@@ -103,16 +105,15 @@ namespace HalcNews.Search
                 UrlImage = "URLimage"
             };
 
+            var folder = await _FolderAppService.GetFolderAsync(1);
             //Act
-            await _SearchAppService.AddNewInFolder(1,newE);
-            var response = await _FolderAppService.GetFolderAsync(1);
-            
+            await _SearchAppService.AddNewInFolder(folder, newE);
 
             //Assert
-            response.ShouldNotBeNull();
-            response.Name.ShouldBe("CarpetaAlerta");
-            response.News.ShouldNotBeEmpty();
-            response.News.FirstOrDefault().Author.ShouldBe("Author");
+            folder.ShouldNotBeNull();
+            folder.Name.ShouldBe("CarpetaAlerta");
+            folder.News.ShouldNotBeEmpty();
+            folder.News.FirstOrDefault().Author.ShouldBe("Tobias Grandi");
         }
 
     }

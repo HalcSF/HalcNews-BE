@@ -30,7 +30,7 @@ namespace HalcNews.ApiNews
 
             //Assert
             response.ShouldNotBeNull();
-            response.Count.ShouldBeGreaterThan(1);
+            response.Count.ShouldBe(5);
         }
 
     }

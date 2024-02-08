@@ -20,7 +20,7 @@ namespace HalcNews.ApiNews
 
         public ApiNewsService(IStatsAppService statsAppService)
         {
-            newsApiClient = new NewsApiClient("1967620b6fd64daf89307eec6ece4a14");
+            newsApiClient = new NewsApiClient("b99417d7b0174c13a74e8ae752b5e51a");
             _IStatsAppService = statsAppService;
         }
 
@@ -35,8 +35,9 @@ namespace HalcNews.ApiNews
                 Q = Search ?? "Apple", //si no hay parámetro de entrada, se busca Apple
                 SortBy = SortBys.Popularity,
                 Language = Languages.ES, // ver lógica para implementar lenguaje del usuario
-                From = DateTime.Now.AddMonths(-1)
-            });
+                From = DateTime.Now.AddMonths(-1),
+                PageSize = 5 // Para no pasarnos del límite de la API
+            }) ;
 
             DateTime responseEndTime = DateTime.Now; //Hora de fin de la solicitud a la API
 
