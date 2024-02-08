@@ -14,7 +14,7 @@ namespace HalcNews.Alertas
 
         public int FolderId { get; set; }
 
-        public ICollection<NotificationDto>? Notifications { get; set; }
+        public ICollection<NotificationDto> Notifications { get; set; } = new List<NotificationDto>();
 
     }
 }

@@ -19,6 +19,6 @@ namespace HalcNews.Carpetas
         // *..* NewsList
         public ICollection<NewsListE>? NewsLists { get; set; }
         // 0..1 .. * Alert
-        public ICollection<Alert>? Alerts { get; set; }
+        public ICollection<Alert> Alerts { get; set; } = new List<Alert>();
     }
 }

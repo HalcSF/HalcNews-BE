@@ -22,7 +22,7 @@ namespace HalcNews.Alertas
         public int FolderId { get; set; }
             
         // 1 .. * Notifications
-        public ICollection<Notification>? Notifications { get; set; }
+        public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
 
     }
 }

@@ -18,14 +18,27 @@ namespace HalcNews.Carpetas
 
         public async Task<ICollection<FolderDto>> GetFolderAsync()
         {
-            var folder = await _repository.GetListAsync(includeDetails: true);
+            var folders = await _repository.GetListAsync(includeDetails: true);
 
-            return ObjectMapper.Map<ICollection<Folder>, ICollection<FolderDto>>(folder);
+            foreach (var folder in folders)
+            {
+                await _repository.EnsureCollectionLoadedAsync(folder, f => f.News);
+                await _repository.EnsureCollectionLoadedAsync(folder, f => f.NewsLists);
+                await _repository.EnsureCollectionLoadedAsync(folder, f => f.Alerts);
+
+            }
+
+            return ObjectMapper.Map<ICollection<Folder>, ICollection<FolderDto>>(folders);
         }
 
         public async Task<FolderDto> GetFolderAsync(int id)
         {
-            var folder = await _repository.GetAsync(id, includeDetails:true);
+            var folder = await _repository.GetAsync(id, includeDetails: true);
+
+            await _repository.EnsureCollectionLoadedAsync(folder, f => f.News);
+            await _repository.EnsureCollectionLoadedAsync(folder, f => f.NewsLists);
+            await _repository.EnsureCollectionLoadedAsync(folder, f => f.Alerts);
+
             return ObjectMapper.Map<Folder, FolderDto>(folder);
         }
 

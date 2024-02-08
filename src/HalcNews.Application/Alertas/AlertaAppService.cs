@@ -19,14 +19,21 @@ namespace HalcNews.Alertas
 
         public async Task<ICollection<AlertDto>> GetAlertAsync()
         {
-            var alert = await _repository.GetListAsync(includeDetails: true);
+            var alerts = await _repository.GetListAsync(includeDetails: true);
 
-            return ObjectMapper.Map<ICollection<Alert>, ICollection<AlertDto>>(alert);
+            foreach (var alert in alerts)
+            {
+                await _repository.EnsureCollectionLoadedAsync(alert, a => a.Notifications);
+            }
+
+            return ObjectMapper.Map<ICollection<Alert>, ICollection<AlertDto>>(alerts);
         }
 
         public async Task<AlertDto> GetAlertAsync(int id)
         {
             var alert = await _repository.GetAsync(id, includeDetails: true);
+
+            await _repository.EnsureCollectionLoadedAsync(alert, a => a.Notifications);
 
             return ObjectMapper.Map<Alert, AlertDto>(alert);
         }

@@ -49,9 +49,17 @@ namespace HalcNews.Alertas
                 New = newE,
             };
 
-            await alertAppService.AddNotification(alert, notificacion);
+            var notificacion2 = new NotificationDto
+            {
+                DateFound = DateTime.Now,
+                isRead = false,
+                New = newE,
+            };
 
-            alert.Notifications.Count.ShouldBe(1);
+            await alertAppService.AddNotification(alert, notificacion);
+            await alertAppService.AddNotification(alert, notificacion2);
+
+            alert.Notifications.Count.ShouldBe(3);
 
         }
 
@@ -59,22 +67,20 @@ namespace HalcNews.Alertas
         public async Task Should_Get_All_Notifications()
         {
             // Arrange
-            var folders = await folderAppService.GetFolderAsync();
+            var alerts = await alertAppService.GetAlertAsync();
 
             var notifications = new List<NotificationDto>();
 
-            foreach (var folder in folders)
-            {
-                foreach (var alert in folder.Alerts)
-                {
-                    foreach (var notification in alert.Notifications)
-                    {
-                        notifications.Add(notification);
-                    }
-                }
-            }
 
-            notifications.Count.ShouldBe(2);
+            foreach (var alert in alerts)
+            {
+                foreach (var notification in alert.Notifications)
+                {
+                    notifications.Add(notification);
+                }
+
+                notifications.Count.ShouldBe(1);
+            }
         }
     }
 }

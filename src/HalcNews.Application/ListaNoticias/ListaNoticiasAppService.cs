@@ -18,6 +18,11 @@ namespace HalcNews.NewsList
         {
             var newsList = await _repository.GetListAsync(includeDetails: true);
 
+            foreach (var nl in newsList)
+            {
+                await _repository.EnsureCollectionLoadedAsync(nl, nl => nl.News);
+            }
+
             return ObjectMapper.Map<ICollection<NewsListE>, ICollection<NewsListDto>>(newsList);
         }
 
