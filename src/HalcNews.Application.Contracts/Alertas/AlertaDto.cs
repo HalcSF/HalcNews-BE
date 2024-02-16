@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Volo.Abp.Application.Dtos;
 using HalcNews.Carpetas;
+using HalcNews.Notificaciones;
 
 namespace HalcNews.Alertas
 {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Volo.Abp.Application.Dtos;
 
-namespace HalcNews.Alertas
+namespace HalcNews.Notificaciones
 {
     public class NotificationDto : EntityDto<int>
     {
@@ -12,8 +12,8 @@ namespace HalcNews.Alertas
         public DateTime DateFound { get; set; } = DateTime.Now;
         public bool isRead { get; set; } = false;
 
-        //// Relación con Alert
-        //public Alert Alert { get; set; }
+        // Relación con Alert
+        public int AlertId { get; set; }
 
         // Relación con Noticia
 

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
+using HalcNews.News;
+using HalcNews.Alertas;
 
-namespace HalcNews.Alertas
+namespace HalcNews.Notificaciones
 {
     public interface INotificationAppService : IApplicationService
     {
@@ -13,5 +15,6 @@ namespace HalcNews.Alertas
         Task InsertNotificationAsync(NotificationDto Notificacion);
         Task UpdateNotificationAsync(NotificationDto Notificacion);
         Task RemoveNotificationAsync(NotificationDto Notificacion);
+        Task<NotificationDto> CreateNotification(NewDto newE, DateTime date, AlertDto alert);
     }
 }

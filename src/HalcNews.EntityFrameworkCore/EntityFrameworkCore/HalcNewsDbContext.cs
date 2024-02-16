@@ -24,6 +24,7 @@ using HalcNews.Carpetas;
 using Microsoft.Identity.Client;
 using HalcNews.Estadisticas;
 using System;
+using HalcNews.Notificaciones;
 
 namespace HalcNews.EntityFrameworkCore;
 
@@ -187,8 +188,8 @@ public class HalcNewsDbContext :
             b.Property(x => x.isActive).IsRequired();
             b.Property(x => x.FolderId).IsRequired();
 
-            b.HasMany(x => x.Notifications)
-                .WithOne(x => x.Alert);
+            b.HasMany(x => x.Notifications);
+                //.WithOne(x => x.Alert);
         });
 
         builder.Entity<Notification>(b =>

@@ -14,6 +14,7 @@ using Volo.Abp.ObjectMapping;
 using NewsAPI.Constants;
 using NewsAPI.Models;
 using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
+using HalcNews.Notificaciones;
 
 namespace HalcNews.Busqueda
 {

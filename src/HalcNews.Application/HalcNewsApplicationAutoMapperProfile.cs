@@ -11,6 +11,7 @@ using HalcNews.Alertas;
 using HalcNews.Carpetas;
 using HalcNews.ApiNews;
 using HalcNews.Estadisticas;
+using HalcNews.Notificaciones;
 
 namespace HalcNews;
 

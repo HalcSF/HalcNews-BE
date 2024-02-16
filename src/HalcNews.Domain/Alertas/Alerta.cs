@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Entities;
+using HalcNews.Notificaciones;
 
 namespace HalcNews.Alertas
 {

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
+using HalcNews.Notificaciones;
 
 namespace HalcNews.Alertas
 {
@@ -62,7 +63,9 @@ namespace HalcNews.Alertas
         {
             var alertMapped = ObjectMapper.Map<AlertDto, Alert>(alert);
             alert.Notifications.Add(notification);
+
             await _repository.UpdateAsync(alertMapped);
+
         }
     }
 }

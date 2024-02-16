@@ -7,9 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Entities;
+using HalcNews.Alertas;
 
 
-namespace HalcNews.Alertas
+namespace HalcNews.Notificaciones
 {
     public class Notification : Entity<int>
     {
@@ -18,7 +19,7 @@ namespace HalcNews.Alertas
         public bool isRead { get; set; } = false;
 
         // Relación con Alert
-        public Alert Alert { get; set; }
+        public int AlertId { get; set; }
 
         // Relación con Noticia
 

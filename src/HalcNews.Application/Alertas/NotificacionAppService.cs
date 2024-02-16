@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.ObjectMapping;
 using Volo.Abp.Application.Services;
+using HalcNews.News;
+using HalcNews.Alertas;
 
-namespace HalcNews.Alertas
+namespace HalcNews.Notificaciones
 {
     public class NotificacionAppService : HalcNewsAppService, INotificationAppService
     {
@@ -49,6 +51,21 @@ namespace HalcNews.Alertas
         {
             var notificationMapped = ObjectMapper.Map<NotificationDto, Notification>(Notification);
             await _repository.DeleteAsync(notificationMapped);
+        }
+
+        public async Task<NotificationDto> CreateNotification(NewDto newE, DateTime date, AlertDto alert)
+        {
+            var notificationDto = new NotificationDto
+            {
+                DateFound = date,
+                isRead = false,
+                New = newE,
+                AlertId = alert.Id,
+            };
+
+            var notificationMapped = ObjectMapper.Map<NotificationDto, Notification>(notificationDto);
+            await _repository.InsertAsync(notificationMapped);
+            return notificationDto;
         }
     }
 }
