@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HalcNews.Notificaciones;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Volo.Abp.Application.Dtos;
@@ -14,6 +15,8 @@ namespace HalcNews.News
         public DateTime? Date { get; set; } = DateTime.Now;
         public string? Url { get; set; } = "";
         public string? UrlImage { get; set; } = "";
+
+        public ICollection<NotificationDto>? Notifications { get; set; }
 
     }
 }

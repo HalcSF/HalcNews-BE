@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Entities;
+using HalcNews.Notificaciones;
 
 namespace HalcNews.Noticias
 {
@@ -31,6 +32,8 @@ namespace HalcNews.Noticias
 
         // * .. *  Folder
         public ICollection<Folder>? Folders { get; set; }
+
+        public ICollection<Notification>? Notifications { get; set; }
 
     }
 }

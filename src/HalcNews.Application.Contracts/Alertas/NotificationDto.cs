@@ -1,4 +1,5 @@
-﻿using HalcNews.News;
+﻿using HalcNews.Alertas;
+using HalcNews.News;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,11 +14,11 @@ namespace HalcNews.Notificaciones
         public bool isRead { get; set; } = false;
 
         // Relación con Alert
-        public int AlertId { get; set; }
+        public AlertDto? Alert { get; set; }
 
         // Relación con Noticia
 
-        public NewDto? New { get; set; } = new NewDto();
+        public NewDto? New { get; set; }
 
     }
 }

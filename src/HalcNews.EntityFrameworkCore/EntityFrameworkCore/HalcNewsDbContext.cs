@@ -142,7 +142,8 @@ public class HalcNewsDbContext :
                 .IsRequired();
 
             // Relación con NewsList y Folder son configuradas por convencion por EF Core
-
+            b.HasMany(x => x.Notifications)
+                .WithOne(x => x.New);
         });
 
         //Entidad ListaNoticias
@@ -188,8 +189,8 @@ public class HalcNewsDbContext :
             b.Property(x => x.isActive).IsRequired();
             b.Property(x => x.FolderId).IsRequired();
 
-            b.HasMany(x => x.Notifications);
-                //.WithOne(x => x.Alert);
+            b.HasMany(x => x.Notifications)
+                .WithOne(x => x.Alert);
         });
 
         builder.Entity<Notification>(b =>
@@ -217,10 +218,10 @@ public class HalcNewsDbContext :
             b.ToTable(HalcNewsConsts.DbTablePrefix + "Statistics", HalcNewsConsts.DbSchema);
             b.ConfigureByConvention();
             b.Property(x => x.Date).IsRequired();
-        b.Property(x => x.ResponseTime).IsRequired();
-        b.Property(x => x.TotalArticles).IsRequired();
-        b.Property(x => x.ArticlesWithImages).IsRequired();
-        b.Property(x => x.Search);
+            b.Property(x => x.ResponseTime).IsRequired();
+            b.Property(x => x.TotalArticles).IsRequired();
+            b.Property(x => x.ArticlesWithImages).IsRequired();
+            b.Property(x => x.Search);
 });
     }
 }

@@ -19,11 +19,11 @@ namespace HalcNews.Notificaciones
         public bool isRead { get; set; } = false;
 
         // Relación con Alert
-        public int AlertId { get; set; }
+        public Alert? Alert { get; set; }
 
         // Relación con Noticia
 
-        public New? New { get; set; } = new New();
+        public New? New { get; set; }
 
     }
 }

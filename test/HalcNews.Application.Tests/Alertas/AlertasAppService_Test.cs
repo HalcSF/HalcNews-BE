@@ -49,16 +49,17 @@ namespace HalcNews.Alertas
                 UrlImage = "URLimage"
             };
 
-            //var notificacion = new NotificationDto
-            //{
-            //    DateFound = DateTime.Now,
-            //    isRead = false,
-            //    New = newE,
-            //};
+            var notificacion = new NotificationDto
+            {
+                DateFound = DateTime.Now,
+                isRead = false,
+                New = newE,
+            };
 
-            var date = DateTime.Now;
-            var notificacion = await notificationAppService.CreateNotification(newE, date, alert);
             await alertAppService.AddNotification(alert, notificacion);
+
+            await notificationAppService.InsertNotificationAsync(notificacion);
+
             var notificaciones = await notificationAppService.GetNotificationAsync();
 
             alert.Notifications.Count.ShouldBe(2);

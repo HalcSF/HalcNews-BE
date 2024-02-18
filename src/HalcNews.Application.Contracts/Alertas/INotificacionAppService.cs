@@ -15,6 +15,5 @@ namespace HalcNews.Notificaciones
         Task InsertNotificationAsync(NotificationDto Notificacion);
         Task UpdateNotificationAsync(NotificationDto Notificacion);
         Task RemoveNotificationAsync(NotificationDto Notificacion);
-        Task<NotificationDto> CreateNotification(NewDto newE, DateTime date, AlertDto alert);
     }
 }
