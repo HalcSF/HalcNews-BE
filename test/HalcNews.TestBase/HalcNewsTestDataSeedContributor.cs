@@ -73,7 +73,7 @@ public class HalcNewsTestDataSeedContributor : IDataSeedContributor, ITransientD
             {
                 DateFound = DateTime.Now,
                 isRead = false,
-                New = newE,
+                NewId = newE.Id,
             }},
         };
 

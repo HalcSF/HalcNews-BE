@@ -31,7 +31,7 @@ namespace HalcNews.Noticias
         // * .. *  Folder
         public ICollection<Folder>? Folders { get; set; }
 
-        public ICollection<Notification>? Notifications { get; set; }
+        //public ICollection<Notification>? Notifications { get; set; }
 
     }
 }

@@ -142,8 +142,8 @@ public class HalcNewsDbContext :
 
             // Relación con NewsList y Folder son configuradas por convencion por EF Core
 
-            b.HasMany(x => x.Notifications)
-                .WithOne(x => x.New);
+            //b.HasMany(x => x.Notifications)
+                //.WithOne(x => x.New);
         });
 
         //Entidad ListaNoticias

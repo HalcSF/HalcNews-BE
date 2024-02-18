@@ -108,11 +108,12 @@ namespace HalcNews.Busqueda
                 {
                     DateFound = DateTime.Now,
                     isRead = false,
-                    New = newDto,
+                    NewId = newDto.Id,
                 };
 
                 await _IAlertAppService.AddNotification(alert, newNotification); // Pasar la misma instancia de Alert
             }
         }
+        
     }
 }

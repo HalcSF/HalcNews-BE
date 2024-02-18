@@ -18,7 +18,7 @@ namespace HalcNews.Notificaciones
 
         // Relación con Noticia
 
-        public NewDto? New { get; set; }
+        public int NewId { get; set; }
 
     }
 }
