@@ -24,8 +24,6 @@ namespace HalcNews.Noticias
 
         // 1 .. * Lecturies
         public ICollection<Lectury>? Lecturies { get; set; }
-        // * .. 1 Source
-        public Source? Source { get; set; }
 
         // * .. * NewsList
         public ICollection<NewsListE>? NewsLists { get; set; }

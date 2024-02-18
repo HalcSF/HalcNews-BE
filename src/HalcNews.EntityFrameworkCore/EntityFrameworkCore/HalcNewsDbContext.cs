@@ -138,10 +138,10 @@ public class HalcNewsDbContext :
             //Relación con Lectura
 
             b.HasMany(x => x.Lecturies)
-                .WithOne(x => x.New)
-                .IsRequired();
+                .WithOne(x => x.New);
 
             // Relación con NewsList y Folder son configuradas por convencion por EF Core
+
             b.HasMany(x => x.Notifications)
                 .WithOne(x => x.New);
         });

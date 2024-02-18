@@ -62,7 +62,9 @@ namespace HalcNews.Alertas
         public async Task AddNotification(AlertDto alert, NotificationDto notification)
         {
             var alertMapped = ObjectMapper.Map<AlertDto, Alert>(alert);
-            alert.Notifications.Add(notification);
+            var notificationMapped = ObjectMapper.Map<NotificationDto, Notification>(notification);
+
+            alertMapped.Notifications.Add(notificationMapped);
 
             await _repository.UpdateAsync(alertMapped);
 

@@ -34,11 +34,11 @@ namespace HalcNews.Alertas
         [Fact]
         public async Task Should_Add_Notification()
         {
-            //Arrage
+            // Arrange
             var alert = await alertAppService.GetAlertAsync(1);
 
             // Supongamos que se encontró la siguiente noticia nueva a la que se quiere notificar
-            var newE = new NewDto
+            var newE1 = new NewDto
             {
                 Author = "Tobias Grandi",
                 Title = "TituloEjemplo",
@@ -49,21 +49,43 @@ namespace HalcNews.Alertas
                 UrlImage = "URLimage"
             };
 
-            var notificacion = new NotificationDto
+            var notificacion1 = new NotificationDto
             {
                 DateFound = DateTime.Now,
                 isRead = false,
-                New = newE,
+                New = newE1,
             };
 
-            await alertAppService.AddNotification(alert, notificacion);
+            await alertAppService.AddNotification(alert, notificacion1);
 
-            await notificationAppService.InsertNotificationAsync(notificacion);
+            // Crear una nueva instancia de NewDto para la segunda notificación
+            var newE2 = new NewDto
+            {
+                Author = "Tobias Grandi",
+                Title = "TituloEjemplo2",
+                Description = "DescripcionEjemplo2",
+                Content = "ContentEjemplo2",
+                Date = DateTime.Now,
+                Url = "URL2",
+                UrlImage = "URLimage2"
+            };
+
+            var notificacion2 = new NotificationDto
+            {
+                DateFound = DateTime.Now,
+                isRead = false,
+                New = newE2,
+            };
+
+            await alertAppService.AddNotification(alert, notificacion2);
 
             var notificaciones = await notificationAppService.GetNotificationAsync();
 
-            alert.Notifications.Count.ShouldBe(2);
-            notificaciones.Count.ShouldBe(2);
+            // Nos traemos la alerta actualizada
+            alert = await alertAppService.GetAlertAsync(1);
+
+            alert.Notifications.Count.ShouldBe(3);
+            notificaciones.Count.ShouldBe(3);
             notificaciones.First().isRead.ShouldBeFalse();
         }
 
