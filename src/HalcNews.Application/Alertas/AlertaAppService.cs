@@ -59,15 +59,15 @@ namespace HalcNews.Alertas
             await _repository.DeleteAsync(alertMapped);
         }
 
-        public async Task AddNotification(AlertDto alert, NotificationDto notification)
+        public async Task AddNotification(AlertDto alertDto, NotificationDto notification)
         {
-            var alertMapped = ObjectMapper.Map<AlertDto, Alert>(alert);
+            var alert = await _repository.GetAsync(alertDto.Id); // Obtener la entidad Alert de la base de datos
+
             var notificationMapped = ObjectMapper.Map<NotificationDto, Notification>(notification);
 
-            alertMapped.Notifications.Add(notificationMapped);
+            alert.Notifications.Add(notificationMapped);
 
-            await _repository.UpdateAsync(alertMapped);
-
+            await _repository.UpdateAsync(alert);
         }
     }
 }

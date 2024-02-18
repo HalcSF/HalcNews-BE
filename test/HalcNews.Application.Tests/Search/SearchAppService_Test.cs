@@ -14,6 +14,7 @@ using Xunit;
 using AutoMapper.Internal.Mappers;
 using Microsoft.EntityFrameworkCore;
 using Polly;
+using System.Diagnostics;
 
 namespace HalcNews.Search
 {
@@ -120,6 +121,8 @@ namespace HalcNews.Search
         public async Task Should_Search_With_Date()
         {
             //Arrage
+
+            //Creamos una noticia con una fecha del día después de la alerta creada y la agregamos
             var newE = new NewDto
             {
                 Author = "Tobias Grandi",
@@ -132,15 +135,22 @@ namespace HalcNews.Search
             };
 
             await _NewAppService.InsertNewAync(newE);
+
             var folder = await _FolderAppService.GetFolderAsync(1);
-            
+
+            var alert = await _AlertAppService.GetAlertAsync(folder.Alerts.First().Id);
+
             //Act
-            await _SearchAppService.SearchWithDate(folder.Alerts.First().Search, folder.Alerts.First());
+            await _SearchAppService.SearchWithDate(alert.Search, alert);
 
-            //Assert
+            // Actualizamos la alerta
 
-            folder.Alerts.First().Search.ShouldBe("BusquedaPrueba");
-            //folder.Alerts.First().Notifications.Count.ShouldBe(2);
+            await _AlertAppService.GetAlertAsync(alert.Id);
+
+            ////Assert
+
+            alert.Search.ShouldBe("Apple");
+            alert.Notifications.Count.ShouldBe(1);
         }
 
     }

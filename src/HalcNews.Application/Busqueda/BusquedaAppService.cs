@@ -15,6 +15,7 @@ using NewsAPI.Constants;
 using NewsAPI.Models;
 using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 using HalcNews.Notificaciones;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace HalcNews.Busqueda
 {
@@ -95,12 +96,34 @@ namespace HalcNews.Busqueda
 
         }
 
-        public async Task SearchWithDate(string keyword, AlertDto alert)
+        public async Task SearchWithDate(string keyword, AlertDto alertDto)
         {
-            
-            var news = await _IApiNewsAppService.SearchFromDate(keyword, alert.CreationDate);
+            var alert = await _IAlertAppService.GetAlertAsync(alertDto.Id);
 
-            foreach (NewDto newDto in news)
+            // Este código sería en el caso que busquemos noticias desde la API, pero necesitamos simular (para el testing) que encontramos una noticia nueva
+            // así que utilizaremos nuestro propio repositorio de noticias, donde se agregó una nueva el día después de la creación de la alerta
+
+            // var news = await _IApiNewsAppService.SearchFromDate(keyword, alert.CreationDate);
+
+            // Buscamos en nuestro repositorio
+            var news = await _INewAppService.GetNewsAsync();
+
+            // Filtramos las nuevas. Esto se realiza en el código de la api de la linea 106.
+            // Pero necesitamos hacerlo acá por los tipos, no estamos trabajando ArticlesDto como devuelve la API
+            // sino, nuestras entidades New
+
+            var newsFromDate = new List<NewDto>();
+
+            foreach (NewDto newE in news)
+            {
+                if (newE.Date > alertDto.CreationDate)
+                {
+                    newsFromDate.Add(newE);
+                }
+            };
+
+
+            foreach (NewDto newDto in newsFromDate)
             {
                 var newNotification = new NotificationDto
                 {
@@ -109,11 +132,8 @@ namespace HalcNews.Busqueda
                     New = newDto,
                 };
 
-                await _IAlertAppService.AddNotification(alert, newNotification);
-
+                await _IAlertAppService.AddNotification(alert, newNotification); // Pasar la misma instancia de Alert
             }
-
         }
-
     }
 }
