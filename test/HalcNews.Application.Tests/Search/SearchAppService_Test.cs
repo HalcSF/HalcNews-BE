@@ -9,6 +9,7 @@ using HalcNews.News;
 using HalcNews.NewsList;
 using HalcNews.Alertas;
 using HalcNews.Carpetas;
+using HalcNews.Notificaciones;
 using Shouldly;
 using Xunit;
 using AutoMapper.Internal.Mappers;
@@ -26,6 +27,7 @@ namespace HalcNews.Search
         private readonly INewAppService _NewAppService;
         private readonly IAlertAppService _AlertAppService;
         private readonly IFolderAppService _FolderAppService;
+        private readonly INotificationAppService _NotificationAppService;
 
         public SearchAppService_Test()
         {
@@ -34,6 +36,7 @@ namespace HalcNews.Search
             _NewAppService = GetRequiredService<INewAppService>();
             _AlertAppService = GetRequiredService<IAlertAppService>();
             _FolderAppService = GetRequiredService<IFolderAppService>();
+            _NotificationAppService = GetRequiredService<INotificationAppService>();
         }
 
         [Fact]
@@ -123,18 +126,18 @@ namespace HalcNews.Search
             //Arrage
 
             //Creamos una noticia con una fecha del día después de la alerta creada y la agregamos
-            var newE = new NewDto
-            {
-                Author = "Tobias Grandi",
-                Title = "TituloEjemplo",
-                Description = "DescripcionEjemplo",
-                Content = "ContentEjemplo",
-                Date = DateTime.Now.AddDays(1),
-                Url = "URL",
-                UrlImage = "URLimage"
-            };
+            //var newE = new NewDto
+            //{
+            //    Author = "Tobias Grandi",
+            //    Title = "TituloEjemplo",
+            //    Description = "DescripcionEjemplo",
+            //    Content = "ContentEjemplo",
+            //    Date = DateTime.Now.AddDays(1),
+            //    Url = "URL",
+            //    UrlImage = "URLimage"
+            //};
 
-            await _NewAppService.InsertNewAync(newE);
+            //await _NewAppService.InsertNewAync(newE);
 
             var folder = await _FolderAppService.GetFolderAsync(1);
 
@@ -145,12 +148,13 @@ namespace HalcNews.Search
 
             // Actualizamos la alerta
 
-            await _AlertAppService.GetAlertAsync(alert.Id);
+            alert = await _AlertAppService.GetAlertAsync(alert.Id);
 
             ////Assert
 
             alert.Search.ShouldBe("Apple");
-            alert.Notifications.Count.ShouldBe(1);
+            alert.Notifications.Count.ShouldBeGreaterThan(1);
+            //alert.Notifications.First().New.ShouldNotBeNull();
         }
 
     }

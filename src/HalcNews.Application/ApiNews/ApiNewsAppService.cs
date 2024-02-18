@@ -33,13 +33,13 @@ namespace HalcNews.ApiNews
 
             foreach (ArticleDto newD in news)
             {
-                if (newD.PublishedAt > date) 
+                if (newD.PublishedAt >= date) 
                 { 
                     newsFromDate.Add(newD); 
                 }
             };
 
-            return ManualMapper.MapArticlesToNews(news);
+            return ManualMapper.MapArticlesToNews(newsFromDate);
         }
 
 

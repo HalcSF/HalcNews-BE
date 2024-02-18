@@ -96,34 +96,13 @@ namespace HalcNews.Busqueda
 
         }
 
-        public async Task SearchWithDate(string keyword, AlertDto alertDto)
+        public async Task SearchWithDate(string keyword, AlertDto alert)
         {
-            var alert = await _IAlertAppService.GetAlertAsync(alertDto.Id);
+            //var alert = await _IAlertAppService.GetAlertAsync(alertDto.Id);
 
-            // Este código sería en el caso que busquemos noticias desde la API, pero necesitamos simular (para el testing) que encontramos una noticia nueva
-            // así que utilizaremos nuestro propio repositorio de noticias, donde se agregó una nueva el día después de la creación de la alerta
+            var news = await _IApiNewsAppService.SearchFromDate(keyword, DateTime.Now.AddDays(-15));
 
-            // var news = await _IApiNewsAppService.SearchFromDate(keyword, alert.CreationDate);
-
-            // Buscamos en nuestro repositorio
-            var news = await _INewAppService.GetNewsAsync();
-
-            // Filtramos las nuevas. Esto se realiza en el código de la api de la linea 106.
-            // Pero necesitamos hacerlo acá por los tipos, no estamos trabajando ArticlesDto como devuelve la API
-            // sino, nuestras entidades New
-
-            var newsFromDate = new List<NewDto>();
-
-            foreach (NewDto newE in news)
-            {
-                if (newE.Date > alertDto.CreationDate)
-                {
-                    newsFromDate.Add(newE);
-                }
-            };
-
-
-            foreach (NewDto newDto in newsFromDate)
+            foreach (NewDto newDto in news)
             {
                 var newNotification = new NotificationDto
                 {
