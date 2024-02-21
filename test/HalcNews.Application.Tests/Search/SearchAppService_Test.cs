@@ -123,21 +123,6 @@ namespace HalcNews.Search
         [Fact]
         public async Task Should_Search_With_Date()
         {
-            //Arrage
-
-            //Creamos una noticia con una fecha del día después de la alerta creada y la agregamos
-            //var newE = new NewDto
-            //{
-            //    Author = "Tobias Grandi",
-            //    Title = "TituloEjemplo",
-            //    Description = "DescripcionEjemplo",
-            //    Content = "ContentEjemplo",
-            //    Date = DateTime.Now.AddDays(1),
-            //    Url = "URL",
-            //    UrlImage = "URLimage"
-            //};
-
-            //await _NewAppService.InsertNewAync(newE);
 
             var folder = await _FolderAppService.GetFolderAsync(1);
 
@@ -154,7 +139,7 @@ namespace HalcNews.Search
 
             alert.Search.ShouldBe("Apple");
             alert.Notifications.Count.ShouldBeGreaterThan(1);
-            //alert.Notifications.First().New.ShouldNotBeNull();
+            alert.Notifications.First().New.ShouldNotBeNull();
         }
 
     }

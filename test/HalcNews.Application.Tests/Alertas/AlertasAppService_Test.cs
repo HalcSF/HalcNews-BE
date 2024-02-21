@@ -37,7 +37,6 @@ namespace HalcNews.Alertas
             // Arrange
             var alert = await alertAppService.GetAlertAsync(1);
 
-            // Supongamos que se encontró la siguiente noticia nueva a la que se quiere notificar
             var newE1 = new NewDto
             {
                 Author = "Tobias Grandi",
@@ -87,6 +86,7 @@ namespace HalcNews.Alertas
             alert.Notifications.Count.ShouldBe(3);
             notificaciones.Count.ShouldBe(3);
             notificaciones.First().isRead.ShouldBeFalse();
+            notificaciones.First().New.ShouldNotBeNull();
         }
 
         [Fact]
