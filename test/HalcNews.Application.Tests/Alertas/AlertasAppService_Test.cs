@@ -53,7 +53,7 @@ namespace HalcNews.Alertas
             {
                 DateFound = DateTime.Now,
                 isRead = false,
-                NewId = newE1.Id,
+                New = newE1,
             };
 
             await alertAppService.AddNotification(alert, notificacion1);
@@ -74,7 +74,7 @@ namespace HalcNews.Alertas
             {
                 DateFound = DateTime.Now,
                 isRead = false,
-                NewId = newE2.Id,
+                New = newE2,
             };
 
             await alertAppService.AddNotification(alert, notificacion2);
@@ -106,7 +106,7 @@ namespace HalcNews.Alertas
                 }
 
                 notifications.Count.ShouldBe(1);
-                notifications.First().NewId.ShouldBeGreaterThan(1);
+                notifications.First().New.ShouldNotBeNull();
             }
         }
     }

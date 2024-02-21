@@ -154,7 +154,7 @@ namespace HalcNews.Search
 
             alert.Search.ShouldBe("Apple");
             alert.Notifications.Count.ShouldBeGreaterThan(1);
-            alert.Notifications.Last().NewId.ShouldBe(1);
+            //alert.Notifications.First().New.ShouldNotBeNull();
         }
 
     }

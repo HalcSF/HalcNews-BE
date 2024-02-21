@@ -16,7 +16,7 @@ namespace HalcNews.News
         public string? Url { get; set; } = "";
         public string? UrlImage { get; set; } = "";
 
-        //public ICollection<NotificationDto>? Notifications { get; set; }
+        public ICollection<NotificationDto>? Notifications { get; set; }
 
     }
 }
